@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Hut Daily Call Analyzer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #EE3124;
+    --dark-red: #C01E14;
+    --black: #111111;
+    --cream: #FFF8F0;
+    --mid: #555;
+    --border: #e0d5cc;
+    --success: #2D9E6B;
+    --warn: #E07B2A;
+    --fail: #D63030;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--black);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--red);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 4px 20px rgba(238,49,36,0.3);
+  }
+
+  .hut-logo {
+    width: 40px; height: 40px;
+    background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px; color: var(--red);
+    line-height: 1.1; text-align: center;
+  }
+
+  header h1 { font-family: 'Bebas Neue', sans-serif; color: white; font-size: 26px; letter-spacing: 2px; }
+  header p { color: rgba(255,255,255,0.75); font-size: 12px; margin-top: 1px; }
+
+  .container { max-width: 940px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  /* Input */
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px; letter-spacing: 1.5px;
+    color: var(--red); margin-bottom: 14px;
+  }
+
+  .meta-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+
+  label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mid); margin-bottom: 5px; }
+
+  input, select, textarea {
+    width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 9px 12px; background: var(--cream); color: var(--black);
+    outline: none; transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--red); }
+
+  textarea { min-height: 220px; resize: vertical; line-height: 1.6; }
+
+  .hint {
+    font-size: 12px; color: var(--mid);
+    background: #f5ede6; border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 14px;
+    border-left: 3px solid var(--red);
+    line-height: 1.5;
+  }
+
+  .analyze-btn {
+    width: 100%; background: var(--red); color: white; border: none;
+    border-radius: 10px; padding: 15px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .analyze-btn:hover { background: var(--dark-red); }
+  .analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Progress */
+  .progress-area { display: none; text-align: center; padding: 48px 20px; }
+  .spinner {
+    width: 48px; height: 48px;
+    border: 4px solid var(--border); border-top-color: var(--red);
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .progress-text { font-size: 14px; color: var(--mid); }
+  .progress-bar-wrap { width: 260px; height: 6px; background: var(--border); border-radius: 99px; margin: 16px auto 0; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--red); border-radius: 99px; transition: width 0.4s; width: 0%; }
+
+  /* Results */
+  #resultsSection { display: none; }
+
+  /* Daily Summary */
+  .summary-top {
+    background: var(--black); border-radius: 14px;
+    padding: 22px 28px; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+
+  .summary-top h2 { font-family: 'Bebas Neue', sans-serif; color: white; font-size: 22px; letter-spacing: 1.5px; }
+  .summary-top .sub { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 2px; }
+
+  .kpi-row { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  .kpi-box { text-align: center; }
+  .kpi-val { font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 1; }
+  .kpi-lbl { font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* Avg criteria bars */
+  .avg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+
+  .avg-row { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; }
+  .avg-row-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .avg-row-name { font-size: 12px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: var(--mid); }
+  .avg-row-score { font-family: 'Bebas Neue', sans-serif; font-size: 20px; }
+  .bar-bg { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 99px; }
+  .green { color: var(--success); }
+  .yellow { color: var(--warn); }
+  .red-c { color: var(--fail); }
+  .bg-green { background: var(--success); }
+  .bg-yellow { background: var(--warn); }
+  .bg-red { background: var(--fail); }
+
+  /* Insight strip */
+  .insight-strip {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;
+  }
+
+  .insight-box {
+    background: white; border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+  }
+
+  .insight-box h4 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1px;
+    margin-bottom: 8px; color: var(--mid);
+  }
+
+  .insight-box ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .insight-box ul li { font-size: 13px; color: var(--mid); line-height: 1.4; padding-left: 16px; position: relative; }
+  .insight-box ul li::before { content: '→'; position: absolute; left: 0; color: var(--red); font-size: 11px; top: 1px; }
+
+  /* Individual calls */
+  .calls-header {
+    font-family: 'Bebas Neue', sans-serif; font-size: 17px;
+    letter-spacing: 1.5px; color: var(--black);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .calls-header span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    background: var(--red); color: white;
+    border-radius: 99px; padding: 2px 10px; letter-spacing: 0;
+  }
+
+  .call-accordion {
+    background: white; border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 10px; overflow: hidden;
+  }
+
+  .call-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .call-header:hover { background: #faf5f0; }
+
+  .call-header-left { display: flex; align-items: center; gap: 12px; }
+
+  .call-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+    color: var(--mid); min-width: 28px;
+  }
+
+  .call-type-badge {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+    padding: 3px 10px; border-radius: 99px; background: #f0e8e0; color: var(--mid);
+  }
+
+  .call-time { font-size: 12px; color: #999; }
+
+  .call-score-badge {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+    padding: 4px 14px; border-radius: 99px;
+  }
+  .call-score-badge.green { background: #e8f7f0; color: var(--success); }
+  .call-score-badge.yellow { background: #fef3e8; color: var(--warn); }
+  .call-score-badge.red { background: #fdf0f0; color: var(--fail); }
+
+  .chevron { font-size: 12px; color: #aaa; margin-left: 10px; transition: transform 0.2s; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .call-body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); }
+  .call-body.open { display: block; }
+
+  .call-scores-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+
+  .cs-box { background: var(--cream); border-radius: 8px; padding: 10px 12px; }
+  .cs-box-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .cs-name { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--mid); }
+  .cs-score { font-family: 'Bebas Neue', sans-serif; font-size: 17px; }
+  .cs-note { font-size: 11.5px; color: var(--mid); line-height: 1.4; }
+
+  .call-coaching { margin-top: 14px; }
+  .call-coaching h5 { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 1px; color: var(--red); margin-bottom: 8px; }
+  .coaching-pills { display: flex; flex-wrap: wrap; gap: 7px; }
+  .coaching-pill { font-size: 12px; background: #fff3ee; border: 1px solid #ffd0c0; color: #a03a1a; padding: 5px 12px; border-radius: 99px; }
+
+  .reset-btn {
+    width: 100%; background: transparent; color: var(--mid);
+    border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 12px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    margin-top: 20px; transition: all 0.2s;
+  }
+  .reset-btn:hover { border-color: var(--red); color: var(--red); }
+
+  .error-box {
+    display: none; background: #fdf0f0;
+    border: 1px solid #f0c0c0; border-radius: 10px;
+    padding: 14px; color: #a02020; font-size: 14px; margin-top: 12px;
+  }
+
+  @media (max-width: 640px) {
+    .meta-row, .avg-grid, .insight-strip { grid-template-columns: 1fr; }
+    .call-scores-grid { grid-template-columns: 1fr 1fr; }
+    .kpi-row { gap: 12px; }
+    .summary-top { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hut-logo">PIZZA<br>HUT</div>
+  <div>
+    <h1>Daily Call Analyzer</h1>
+
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="card" id="inputSection">
+    <div class="section-title">Upload Day's Transcript</div>
+
+    <div class="meta-row">
+      <div>
+        <label>Store</label>
+        <select id="store">
+          <option value="">Select store</option>
+          <option>McKnight (FMI144)</option>
+          <option>Hanson Ranch (FMI146)</option>
+          <option>Montgomery (FMI150)</option>
+          <option>Sarcee (FMI159)</option>
+          <option>Crowfoot (FMI162)</option>
+        </select>
+      </div>
+      <div>
+        <label>Date</label>
+        <input type="date" id="dateField">
+      </div>
+      <div>
+        <label>Shift</label>
+        <select id="shift">
+          <option value="Full Day">Full Day</option>
+          <option value="Morning (Open–3pm)">Morning (Open–3pm)</option>
+          <option value="Evening (3pm–Close)">Evening (3pm–Close)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="hint">
+      Paste the full day's transcript below. The AI will automatically identify and separate each individual call or counter interaction, then score them all at once.
+    </div>
+
+    <div style="margin-bottom:14px">
+      <label>Full Day Transcript</label>
+      <textarea id="transcript" placeholder="Paste the entire day's transcript here. Can include multiple calls, counter interactions, timestamps — anything from the recording. Example:
+
+[10:15 AM]
+Employee: Thank you for calling Pizza Hut, this is Mike, how can I help?
+Customer: Hi I'd like to order...
+...
+
+[10:42 AM]
+Employee: Pizza Hut, how can I help you?
+Customer: Yeah I want two large pizzas...
+..."></textarea>
+    </div>
+
+    <button class="analyze-btn" onclick="analyze()">ANALYZE FULL DAY</button>
+    <div class="error-box" id="errorBox"></div>
+  </div>
+
+  <div class="progress-area" id="progressArea">
+    <div class="spinner"></div>
+    <div class="progress-text" id="progressText">Reading full day transcript...</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+  </div>
+
+  <div id="resultsSection">
+
+    <!-- Day Summary -->
+    <div class="summary-top">
+      <div>
+        <h2 id="summaryTitle">Daily Summary</h2>
+        <div class="sub" id="summaryMeta"></div>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-box">
+          <div class="kpi-val" id="kpiCalls" style="color:white">—</div>
+          <div class="kpi-lbl">Total Calls</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-val" id="kpiAvg">—</div>
+          <div class="kpi-lbl">Avg Score</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-val" id="kpiBest" style="color:#2D9E6B">—</div>
+          <div class="kpi-lbl">Best Call</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-val" id="kpiWorst" style="color:#D63030">—</div>
+          <div class="kpi-lbl">Worst Call</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Avg by Criteria -->
+    <div class="card" style="padding:20px 24px">
+      <div class="section-title">Average Score by Criteria</div>
+      <div class="avg-grid" id="avgGrid"></div>
+    </div>
+
+    <!-- Insights -->
+    <div class="insight-strip" id="insightStrip">
+      <div class="insight-box">
+        <h4>Top Strengths</h4>
+        <ul id="strengthsList"></ul>
+      </div>
+      <div class="insight-box">
+        <h4>Priority Coaching Areas</h4>
+        <ul id="weaknessList"></ul>
+      </div>
+    </div>
+
+    <!-- Manager summary -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="section-title">Manager Summary</div>
+      <div id="managerSummary" style="font-size:14px;line-height:1.7;color:var(--mid)"></div>
+    </div>
+
+    <!-- Individual Calls -->
+    <div class="calls-header">
+      Individual Calls
+      <span id="callCount">0</span>
+    </div>
+    <div id="callsList"></div>
+
+    <button class="reset-btn" onclick="resetTool()">Analyze Another Day</button>
+  </div>
+
+</div>
+
+<script>
+const CRITERIA = [
+  { key: "greeting", label: "Greeting" },
+  { key: "upsell", label: "Upsell" },
+  { key: "accuracy", label: "Accuracy" },
+  { key: "speed", label: "Speed" },
+  { key: "closing", label: "Closing" },
+  { key: "tone", label: "Tone" },
+  { key: "review_ask", label: "Survey / Review Ask" },
+];
+
+function getColor(score) {
+  if (score >= 8) return "green";
+  if (score >= 5) return "yellow";
+  return "red";
+}
+
+function getBgClass(score) {
+  if (score >= 8) return "bg-green";
+  if (score >= 5) return "bg-yellow";
+  return "bg-red";
+}
+
+function setProgress(pct, text) {
+  document.getElementById("progressBar").style.width = pct + "%";
+  document.getElementById("progressText").textContent = text;
+}
+
+async function analyze() {
+  const transcript = document.getElementById("transcript").value.trim();
+  if (!transcript || transcript.length < 50) {
+    showError("Please paste the day's transcript before analyzing.");
+    return;
+  }
+
+  const store = document.getElementById("store").value || "Unknown Store";
+  const dateVal = document.getElementById("dateField").value;
+  const dateDisplay = dateVal ? new Date(dateVal + 'T12:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }) : new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+  const shift = document.getElementById("shift").value;
+
+  document.getElementById("inputSection").style.display = "none";
+  document.getElementById("progressArea").style.display = "block";
+  document.getElementById("resultsSection").style.display = "none";
+  document.getElementById("errorBox").style.display = "none";
+
+  setProgress(10, "Reading full day transcript...");
+
+  const systemPrompt = `You are a Pizza Hut call quality evaluator for an Area Coach in Calgary, AB. You will receive a full day's worth of transcribed audio from a Pizza Hut store — it may contain many interactions including phone orders, walk-in counter orders, and general calls.
+
+Your job:
+1. Identify and separate EACH individual customer interaction (call or counter) in the transcript
+2. Score each interaction on all 7 criteria
+3. Return a JSON summary of the full day
+
+Score each interaction on a scale of 1–10 for:
+- greeting: Warm greeting, name given, mentioned Pizza Hut?
+- upsell: Suggested drinks, desserts, combos, dips, sides, or upgrades?
+- accuracy: Repeated back order, confirmed address or details?
+- speed: Efficient, no dead air, no fumbling?
+- closing: Mentioned ETA / estimated time? Mentioned Hut Rewards / loyalty?
+- tone: Friendly, professional, patient?
+- review_ask: Asked customer to fill out a survey or leave a Google review / 5-star rating?
+
+Return ONLY valid JSON, no markdown, no explanation:
+
+{
+  "calls": [
+    {
+      "call_number": 1,
+      "time_label": "approximate time or 'Call 1' if no timestamp",
+      "call_type": "Phone Order / Walk-in / Complaint / General",
+      "overall": 7.5,
+      "scores": {
+        "greeting": { "score": 8, "note": "brief reason" },
+        "upsell": { "score": 5, "note": "brief reason" },
+        "accuracy": { "score": 7, "note": "brief reason" },
+        "speed": { "score": 8, "note": "brief reason" },
+        "closing": { "score": 6, "note": "brief reason" },
+        "tone": { "score": 9, "note": "brief reason" },
+        "review_ask": { "score": 1, "note": "brief reason" }
+      },
+      "coaching_notes": ["tip 1", "tip 2"]
+    }
+  ],
+  "day_summary": {
+    "total_calls": 0,
+    "avg_overall": 0,
+    "best_call": 1,
+    "worst_call": 1,
+    "avg_by_criteria": {
+      "greeting": 0, "upsell": 0, "accuracy": 0,
+      "speed": 0, "closing": 0, "tone": 0, "review_ask": 0
+    },
+    "top_strengths": ["strength 1", "strength 2", "strength 3"],
+    "priority_coaching": ["area 1", "area 2", "area 3"],
+    "manager_summary": "2-3 sentence plain English summary for the area coach covering overall performance, top concern, and one positive."
+  }
+}`;
+
+  const userPrompt = `Store: ${store}
+Date: ${dateDisplay}
+Shift: ${shift}
+
+Full Day Transcript:
+${transcript}`;
+
+  setProgress(30, "Identifying individual interactions...");
+
+  try {
+    // Split transcript into chunks if very long (>15000 chars)
+    let result;
+
+    if (transcript.length > 15000) {
+      setProgress(40, "Long transcript detected — processing in chunks...");
+      result = await analyzeInChunks(transcript, store, dateDisplay, shift, systemPrompt);
+    } else {
+      setProgress(50, "Scoring each call...");
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 8000,
+          system: systemPrompt,
+          messages: [{ role: "user", content: userPrompt }]
+        })
+      });
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error.message);
+      const rawText = data.content.map(b => b.text || "").join("");
+      const clean = rawText.replace(/```json|```/g, "").trim();
+      result = JSON.parse(clean);
+    }
+
+    setProgress(90, "Building scorecard...");
+    await new Promise(r => setTimeout(r, 400));
+    renderResults(result, store, dateDisplay, shift);
+
+  } catch (err) {
+    document.getElementById("progressArea").style.display = "none";
+    document.getElementById("inputSection").style.display = "block";
+    showError("Analysis failed. Try shortening the transcript or check your connection. Error: " + err.message);
+    console.error(err);
+  }
+}
+
+async function analyzeInChunks(transcript, store, dateDisplay, shift, systemPrompt) {
+  // Split on blank lines or timestamps heuristically into ~10k char chunks
+  const lines = transcript.split('\n');
+  const chunks = [];
+  let current = [];
+  let len = 0;
+
+  for (const line of lines) {
+    current.push(line);
+    len += line.length;
+    if (len > 9000) {
+      chunks.push(current.join('\n'));
+      current = [];
+      len = 0;
+    }
+  }
+  if (current.length) chunks.push(current.join('\n'));
+
+  let allCalls = [];
+  let callOffset = 0;
+
+  for (let i = 0; i < chunks.length; i++) {
+    setProgress(40 + Math.round((i / chunks.length) * 40), `Processing chunk ${i+1} of ${chunks.length}...`);
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 6000,
+        system: systemPrompt,
+        messages: [{
+          role: "user",
+          content: `Store: ${store}\nDate: ${dateDisplay}\nShift: ${shift}\nNote: This is chunk ${i+1} of ${chunks.length} from the full day transcript.\n\nTranscript chunk:\n${chunks[i]}`
+        }]
+      })
+    });
+
+    const data = await response.json();
+    if (data.error) throw new Error(data.error.message);
+    const rawText = data.content.map(b => b.text || "").join("");
+    const clean = rawText.replace(/```json|```/g, "").trim();
+    const chunkResult = JSON.parse(clean);
+
+    // Renumber calls
+    chunkResult.calls.forEach((c, idx) => {
+      c.call_number = callOffset + idx + 1;
+      allCalls.push(c);
+    });
+    callOffset += chunkResult.calls.length;
+  }
+
+  // Recompute day summary from all calls
+  const totalCalls = allCalls.length;
+  const avgOverall = +(allCalls.reduce((s, c) => s + c.overall, 0) / totalCalls).toFixed(1);
+  const bestCall = allCalls.reduce((b, c) => c.overall > b.overall ? c : b, allCalls[0]);
+  const worstCall = allCalls.reduce((b, c) => c.overall < b.overall ? c : b, allCalls[0]);
+
+  const avgByCriteria = {};
+  CRITERIA.forEach(cr => {
+    avgByCriteria[cr.key] = +(allCalls.reduce((s, c) => s + (c.scores[cr.key]?.score || 0), 0) / totalCalls).toFixed(1);
+  });
+
+  // Find weakest and strongest criteria
+  const sorted = [...CRITERIA].sort((a, b) => avgByCriteria[a.key] - avgByCriteria[b.key]);
+  const weakest = sorted.slice(0, 3).map(c => `${c.label}: avg ${avgByCriteria[c.key]}/10`);
+  const strongest = sorted.slice(-3).reverse().map(c => `${c.label}: avg ${avgByCriteria[c.key]}/10`);
+
+  return {
+    calls: allCalls,
+    day_summary: {
+      total_calls: totalCalls,
+      avg_overall: avgOverall,
+      best_call: bestCall.call_number,
+      worst_call: worstCall.call_number,
+      avg_by_criteria: avgByCriteria,
+      top_strengths: strongest,
+      priority_coaching: weakest,
+      manager_summary: `Analyzed ${totalCalls} interactions for ${store} on ${dateDisplay}. Average score: ${avgOverall}/10. Strongest area: ${strongest[0]}. Needs most attention: ${weakest[0]}.`
+    }
+  };
+}
+
+function renderResults(result, store, dateDisplay, shift) {
+  document.getElementById("progressArea").style.display = "none";
+  const ds = result.day_summary;
+  const calls = result.calls;
+
+  document.getElementById("summaryTitle").textContent = store || "Daily Summary";
+  document.getElementById("summaryMeta").textContent = `${dateDisplay} · ${shift}`;
+
+  document.getElementById("kpiCalls").textContent = ds.total_calls;
+
+  const avgColor = getColor(ds.avg_overall);
+  const avgEl = document.getElementById("kpiAvg");
+  avgEl.textContent = ds.avg_overall + "/10";
+  avgEl.className = "kpi-val " + (avgColor === "green" ? "green" : avgColor === "yellow" ? "yellow" : "red-c");
+
+  document.getElementById("kpiBest").textContent = "#" + ds.best_call;
+  document.getElementById("kpiWorst").textContent = "#" + ds.worst_call;
+
+  // Avg criteria grid
+  const avgGrid = document.getElementById("avgGrid");
+  avgGrid.innerHTML = "";
+  CRITERIA.forEach(cr => {
+    const s = ds.avg_by_criteria[cr.key] || 0;
+    const c = getColor(s);
+    const bg = getBgClass(s);
+    avgGrid.innerHTML += `
+      <div class="avg-row">
+        <div class="avg-row-top">
+          <div class="avg-row-name">${cr.label}</div>
+          <div class="avg-row-score ${c === 'green' ? 'green' : c === 'yellow' ? 'yellow' : 'red-c'}">${s}/10</div>
+        </div>
+        <div class="bar-bg"><div class="bar-fill ${bg}" style="width:${s*10}%"></div></div>
+      </div>`;
+  });
+
+  // Strengths + coaching
+  document.getElementById("strengthsList").innerHTML =
+    (ds.top_strengths || []).map(s => `<li>${s}</li>`).join("");
+  document.getElementById("weaknessList").innerHTML =
+    (ds.priority_coaching || []).map(s => `<li>${s}</li>`).join("");
+
+  document.getElementById("managerSummary").textContent = ds.manager_summary;
+
+  // Individual calls
+  document.getElementById("callCount").textContent = calls.length;
+  const callsList = document.getElementById("callsList");
+  callsList.innerHTML = "";
+
+  calls.forEach(call => {
+    const color = getColor(call.overall);
+    const div = document.createElement("div");
+    div.className = "call-accordion";
+
+    const scoresHTML = CRITERIA.map(cr => {
+      const s = call.scores[cr.key];
+      if (!s) return "";
+      const c = getColor(s.score);
+      return `<div class="cs-box">
+        <div class="cs-box-top">
+          <div class="cs-name">${cr.label}</div>
+          <div class="cs-score ${c === 'green' ? 'green' : c === 'yellow' ? 'yellow' : 'red-c'}">${s.score}/10</div>
+        </div>
+        <div class="cs-note">${s.note}</div>
+      </div>`;
+    }).join("");
+
+    const pillsHTML = (call.coaching_notes || []).map(n =>
+      `<span class="coaching-pill">${n}</span>`).join("");
+
+    div.innerHTML = `
+      <div class="call-header" onclick="toggleCall(this)">
+        <div class="call-header-left">
+          <div class="call-num">#${call.call_number}</div>
+          <div class="call-type-badge">${call.call_type || 'Call'}</div>
+          <div class="call-time">${call.time_label || ''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="call-score-badge ${color}">${call.overall}/10</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="call-body">
+        <div class="call-scores-grid">${scoresHTML}</div>
+        ${pillsHTML ? `<div class="call-coaching"><h5>Coaching Notes</h5><div class="coaching-pills">${pillsHTML}</div></div>` : ''}
+      </div>`;
+
+    callsList.appendChild(div);
+  });
+
+  document.getElementById("resultsSection").style.display = "block";
+  document.getElementById("resultsSection").scrollIntoView({ behavior: "smooth" });
+}
+
+function toggleCall(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector(".chevron");
+  const isOpen = body.classList.contains("open");
+  body.classList.toggle("open", !isOpen);
+  chevron.classList.toggle("open", !isOpen);
+}
+
+function resetTool() {
+  document.getElementById("resultsSection").style.display = "none";
+  document.getElementById("inputSection").style.display = "block";
+  document.getElementById("transcript").value = "";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showError(msg) {
+  const box = document.getElementById("errorBox");
+  box.textContent = msg;
+  box.style.display = "block";
+}
+
+// Set today's date
+document.getElementById("dateField").value = new Date().toISOString().split("T")[0];
+</script>
+</body>
+</html>
