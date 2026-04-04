@@ -473,7 +473,7 @@ async function analyze() {
 }
 
 async function callAPI(apiKey, system, userContent, maxTokens) {
-  const resp = await fetch('https://pizza-proxy.vaghela-mihir91.workers.dev', {
+  const resp = await fetch('https://pizza-proxy.vaghela-mihir91.workers.dev/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
