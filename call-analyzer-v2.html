@@ -432,8 +432,8 @@ Return ONLY valid JSON — no markdown, no explanation:
 }`;
 
 async function analyze() {
-  const apiKey = document.getElementById('apiKey').value.trim();
-  if (!apiKey || !apiKey.startsWith('sk-')) { showError('Please enter a valid Anthropic API key.'); return; }
+  const apiKey = localStorage.getItem('ph_api_key') || document.getElementById('apiKey').value.trim();
+  if (!apiKey || !apiKey.startsWith('sk-')) { showError('Please click the ⚙️ gear icon (top right) and enter your Anthropic API key first.'); return; }
   const transcript = document.getElementById('transcript').value.trim();
   if (!transcript || transcript.length < 30) { showError('Please paste the transcript first.'); return; }
 
@@ -652,8 +652,11 @@ function showError(msg) {
 document.getElementById('dateField').value = new Date().toISOString().split('T')[0];
 
 function openSettings() {
+  // Load saved key into field
+  const saved = localStorage.getItem('ph_api_key') || '';
+  document.getElementById('apiKey').value = saved;
   document.getElementById('modalOverlay').classList.add('open');
-  document.getElementById('apiKey').focus();
+  setTimeout(() => document.getElementById('apiKey').focus(), 100);
 }
 function closeSettings() {
   document.getElementById('modalOverlay').classList.remove('open');
@@ -665,16 +668,28 @@ function saveSettings() {
   const key = document.getElementById('apiKey').value.trim();
   const btn = document.getElementById('gearBtn');
   if (key && key.startsWith('sk-')) {
+    localStorage.setItem('ph_api_key', key);
     btn.textContent = '✓';
     btn.classList.add('configured');
-    btn.title = 'API key configured';
+    btn.title = 'API key configured ✓';
   } else if (!key) {
+    localStorage.removeItem('ph_api_key');
     btn.textContent = '⚙️';
     btn.classList.remove('configured');
     btn.title = 'API Settings';
   }
   closeSettings();
 }
+// On load, restore saved key state
+(function() {
+  const saved = localStorage.getItem('ph_api_key');
+  if (saved && saved.startsWith('sk-')) {
+    const btn = document.getElementById('gearBtn');
+    btn.textContent = '✓';
+    btn.classList.add('configured');
+    btn.title = 'API key configured ✓';
+  }
+})();
 </script>
 </body>
 </html>
