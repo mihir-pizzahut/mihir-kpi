@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Recognition — AC Region</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #EE3124; --dark-red: #C01E14;
+  --gold: #F5A623; --gold-light: #FFF3D4;
+  --black: #0f0f0f; --white: #fff;
+  --bg: #F7F3EE; --card: #ffffff;
+  --border: #E8DDD4; --mid: #888;
+  --green: #2D9E6B; --blue: #2563EB;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--black); min-height: 100vh; }
+
+/* HEADER */
+header {
+  background: var(--black);
+  padding: 0 28px;
+  height: 54px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 2px solid var(--red);
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-dot { width: 28px; height: 28px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue'; font-size: 9px; color: white; line-height: 1.1; text-align: center; }
+.logo h1 { font-family: 'Bebas Neue'; color: white; font-size: 20px; letter-spacing: 2px; }
+.header-right { display: flex; align-items: center; gap: 10px; }
+.streak-badge { background: var(--gold); color: var(--black); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 99px; letter-spacing: 0.5px; }
+
+/* TABS */
+.tabs { display: flex; background: var(--black); padding: 0 28px; gap: 2px; border-bottom: 1px solid #1a1a1a; overflow-x: auto; }
+.tab { padding: 10px 18px; font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #555; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
+.tab:hover { color: #888; }
+.tab.active { color: white; border-bottom-color: var(--gold); }
+
+.container { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* CARDS */
+.card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); padding: 20px 24px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.card-title { font-family: 'Bebas Neue'; font-size: 15px; letter-spacing: 1.5px; color: var(--red); margin-bottom: 14px; }
+
+label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mid); margin-bottom: 5px; }
+input, select, textarea { width: 100%; font-family: 'DM Sans'; font-size: 13px; border: 1.5px solid var(--border); border-radius: 7px; padding: 8px 12px; background: var(--bg); color: var(--black); outline: none; transition: border-color 0.2s; }
+input:focus, select:focus, textarea:focus { border-color: var(--red); }
+textarea { resize: vertical; line-height: 1.6; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+
+/* BUTTONS */
+.btn { font-family: 'DM Sans'; font-size: 12px; font-weight: 600; border: none; border-radius: 7px; padding: 8px 16px; cursor: pointer; transition: all 0.15s; letter-spacing: 0.4px; }
+.btn-red { background: var(--red); color: white; }
+.btn-red:hover { background: var(--dark-red); }
+.btn-gold { background: var(--gold); color: var(--black); }
+.btn-gold:hover { background: #e09610; }
+.btn-ghost { background: transparent; color: var(--mid); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--red); color: var(--red); }
+.btn-danger { background: #fdf0f0; color: #a02020; border: 1px solid #f0c0c0; }
+.btn-big { width: 100%; background: var(--red); color: white; border: none; border-radius: 10px; padding: 14px; font-family: 'Bebas Neue'; font-size: 20px; letter-spacing: 2px; cursor: pointer; transition: background 0.2s; margin-top: 6px; }
+.btn-big:hover { background: var(--dark-red); }
+.btn-big.gold { background: var(--gold); color: var(--black); }
+.btn-big.gold:hover { background: #e09610; }
+
+/* DASHBOARD */
+.dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+.dash-kpi { background: var(--black); border-radius: 10px; padding: 16px 18px; }
+.dash-kpi-val { font-family: 'Bebas Neue'; font-size: 36px; line-height: 1; color: white; }
+.dash-kpi-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #555; margin-top: 3px; }
+.dash-kpi.highlight .dash-kpi-val { color: var(--gold); }
+.dash-kpi.red-k .dash-kpi-val { color: var(--red); }
+.dash-kpi.green-k .dash-kpi-val { color: #4ade80; }
+
+/* OVERDUE ALERT */
+.overdue-strip { background: #fff8e6; border: 1px solid #f5d060; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; }
+.overdue-strip h4 { font-family: 'Bebas Neue'; font-size: 14px; letter-spacing: 1px; color: #a07010; margin-bottom: 8px; }
+.overdue-names { display: flex; flex-wrap: wrap; gap: 7px; }
+.overdue-pill { font-size: 12px; background: #fff3cc; border: 1px solid #f5d060; color: #7a5500; padding: 4px 12px; border-radius: 99px; font-weight: 500; }
+
+/* STORE FILTER */
+.store-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.store-tab { padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--border); background: white; color: var(--mid); transition: all 0.15s; }
+.store-tab.active { background: var(--red); color: white; border-color: var(--red); }
+
+/* RECOGNITION CARDS */
+.rec-list { display: flex; flex-direction: column; gap: 10px; }
+.rec-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; display: flex; align-items: flex-start; gap: 14px; transition: box-shadow 0.15s; }
+.rec-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.rec-card.pinned { border-color: var(--gold); background: #fffdf5; }
+.rec-emoji { font-size: 28px; flex-shrink: 0; line-height: 1; }
+.rec-body { flex: 1; }
+.rec-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.rec-name { font-size: 14px; font-weight: 700; color: var(--black); }
+.rec-store { font-size: 11px; color: var(--mid); background: #f0ebe5; padding: 2px 8px; border-radius: 99px; }
+.rec-date { font-size: 11px; color: #bbb; margin-left: auto; }
+.rec-category { font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; }
+.cat-upsell { background: #e8f7f0; color: #1a7a50; }
+.cat-guest { background: #fef3e8; color: #c25a1a; }
+.cat-teamwork { background: #e8f0fe; color: #1a56cc; }
+.cat-leadership { background: #f5e8fe; color: #7a1acc; }
+.cat-attendance { background: #e8fef0; color: #1acc5a; }
+.cat-improvement { background: #fefde8; color: #ccaa1a; }
+.cat-above { background: #fde8e8; color: #cc1a1a; }
+.cat-other { background: #f0f0f0; color: #555; }
+.rec-note { font-size: 13px; color: var(--mid); line-height: 1.5; margin-top: 4px; }
+.rec-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+
+/* EMPLOYEE ROSTER */
+.emp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.emp-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.emp-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.emp-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue'; font-size: 16px; color: white; flex-shrink: 0; }
+.emp-info-name { font-size: 13px; font-weight: 700; color: var(--black); }
+.emp-info-role { font-size: 11px; color: var(--mid); }
+.emp-stats { display: flex; gap: 10px; }
+.emp-stat { font-size: 11px; color: var(--mid); }
+.emp-stat strong { color: var(--black); font-weight: 700; }
+.emp-last { font-size: 11px; color: #bbb; margin-top: 6px; }
+.emp-overdue { color: var(--red) !important; font-weight: 600; }
+
+/* MESSAGE OUTPUT */
+.msg-output { background: #f9f6f2; border: 1px solid var(--border); border-radius: 10px; padding: 16px; font-size: 14px; line-height: 1.8; color: var(--black); white-space: pre-wrap; margin-top: 12px; min-height: 80px; }
+.msg-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+/* CATEGORY PILLS */
+.cat-picker { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.cat-pick-btn { font-size: 12px; padding: 5px 12px; border-radius: 99px; border: 1.5px solid var(--border); background: white; color: var(--mid); cursor: pointer; transition: all 0.15s; font-weight: 500; }
+.cat-pick-btn.selected { border-color: var(--red); background: var(--red); color: white; }
+
+/* SPINNER */
+.spinner { width: 20px; height: 20px; border: 3px solid var(--border); border-top-color: var(--red); border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-box { display: none; background: #fdf0f0; border: 1px solid #f0c0c0; border-radius: 8px; padding: 12px; color: #a02020; font-size: 13px; margin-top: 10px; }
+
+@media (max-width: 640px) {
+  .dash-grid { grid-template-columns: 1fr 1fr; }
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+  .emp-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-dot">PH</div>
+    <h1>Team Recognition</h1>
+  </div>
+  <div class="header-right">
+    <div class="streak-badge" id="streakBadge">🔥 0 day streak</div>
+    <button class="btn btn-ghost" style="font-size:11px" onclick="openSettings()">⚙️ API</button>
+  </div>
+</header>
+
+<!-- Settings Modal -->
+<div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center" id="settingsModal" onclick="closeSettingsOutside(event)">
+  <div style="background:white;border-radius:14px;padding:28px;width:400px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <div style="font-family:'Bebas Neue';font-size:18px;letter-spacing:1.5px;color:var(--red);margin-bottom:8px">API Settings</div>
+    <p style="font-size:12px;color:var(--mid);margin-bottom:14px;line-height:1.5">Anthropic API key — used to generate personalized recognition messages. Saved in your browser.</p>
+    <label>Anthropic API Key</label>
+    <input type="password" id="apiKeyInput" placeholder="sk-ant-..." style="margin-top:5px">
+    <div style="display:flex;gap:10px;margin-top:14px">
+      <button class="btn btn-red" style="flex:1;font-family:'Bebas Neue';font-size:16px;letter-spacing:1px" onclick="saveSettings()">SAVE</button>
+      <button class="btn btn-ghost" onclick="closeSettings()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="tabs" id="mainTabs">
+  <div class="tab active" onclick="switchTab('dashboard')">📊 Dashboard</div>
+  <div class="tab" onclick="switchTab('recognize')">⭐ Recognize</div>
+  <div class="tab" onclick="switchTab('history')">📋 History</div>
+  <div class="tab" onclick="switchTab('team')">👥 Team</div>
+  <div class="tab" onclick="switchTab('generate')">✍️ Generate Message</div>
+  <div class="tab" onclick="switchTab('ideas')">💡 Ideas</div>
+  <div class="tab" onclick="switchTab('rewards')">🎁 Rewards</div>
+  <div class="tab" onclick="switchTab('reminders')">🔔 Reminders</div>
+</div>
+
+<div class="container">
+
+<!-- ======================== DASHBOARD ======================== -->
+<div class="tab-panel active" id="tab-dashboard">
+
+  <div class="dash-grid" id="dashKPIs"></div>
+
+  <div class="overdue-strip" id="overdueStrip" style="display:none">
+    <h4>⚠️ Overdue Recognition (14+ days)</h4>
+    <div class="overdue-names" id="overdueNames"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Recent Recognitions</div>
+    <div class="rec-list" id="dashRecentList"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Recognition by Store</div>
+    <div id="storeBreakdown"></div>
+  </div>
+
+</div>
+
+<!-- ======================== RECOGNIZE ======================== -->
+<div class="tab-panel" id="tab-recognize">
+  <div class="card">
+    <div class="card-title">Add Recognition</div>
+
+    <div class="grid3">
+      <div>
+        <label>Store</label>
+        <select id="recStore" onchange="populateEmployees()">
+          <option value="">Select store</option>
+          <option>McKnight (FMI144)</option>
+          <option>Hanson Ranch (FMI146)</option>
+          <option>Montgomery (FMI150)</option>
+          <option>Sarcee (FMI159)</option>
+          <option>Crowfoot (FMI162)</option>
+        </select>
+      </div>
+      <div>
+        <label>Employee</label>
+        <select id="recEmployee">
+          <option value="">Select store first</option>
+        </select>
+      </div>
+      <div>
+        <label>Date</label>
+        <input type="date" id="recDate">
+      </div>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label>Category</label>
+      <div class="cat-picker">
+        <button class="cat-pick-btn" onclick="selectCat(this,'upsell')">💰 Upsell Win</button>
+        <button class="cat-pick-btn" onclick="selectCat(this,'guest')">⭐ Guest Experience</button>
+        <button class="cat-pick-btn" onclick="selectCat(this,'teamwork')">🤝 Teamwork</button>
+        <button class="cat-pick-btn" onclick="selectCat(this,'leadership')">🎯 Leadership</button>
+        <button class="cat-pick-btn" onclick="selectCat(this,'attendance')">✅ Reliability</button>
+        <button class="cat-pick-btn" onclick="selectCat(this,'improvement')">📈 Improvement</button>
+        <button class="cat-pick-btn" onclick="selectCat(this,'above')">🚀 Above & Beyond</button>
+        <button class="cat-pick-btn" onclick="selectCat(this,'other')">💬 Other</button>
+      </div>
+      <input type="hidden" id="recCategory" value="">
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label>What did they do? (your notes)</label>
+      <textarea id="recNote" style="min-height:80px" placeholder="e.g. Upsold drinks and dessert on 4 out of 5 orders during dinner rush. Customer even commented on how helpful she was."></textarea>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label>Recognition Type</label>
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <button class="cat-pick-btn" id="rtype-verbal" onclick="selectRtype('verbal')">🗣️ Verbal</button>
+        <button class="cat-pick-btn" id="rtype-whatsapp" onclick="selectRtype('whatsapp')">💬 WhatsApp</button>
+        <button class="cat-pick-btn" id="rtype-groupchat" onclick="selectRtype('groupchat')">👥 Group Chat</button>
+        <button class="cat-pick-btn" id="rtype-written" onclick="selectRtype('written')">📝 Written Note</button>
+      </div>
+      <input type="hidden" id="recType" value="">
+    </div>
+
+    <button class="btn-big" onclick="saveRecognition()">SAVE RECOGNITION ⭐</button>
+    <div class="error-box" id="recError"></div>
+  </div>
+</div>
+
+<!-- ======================== HISTORY ======================== -->
+<div class="tab-panel" id="tab-history">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <div class="store-tabs" id="historyStoreTabs"></div>
+    <input type="text" id="historySearch" placeholder="Search employee..." style="width:180px" oninput="renderHistory()">
+  </div>
+  <div class="rec-list" id="historyList"></div>
+</div>
+
+<!-- ======================== TEAM ======================== -->
+<div class="tab-panel" id="tab-team">
+  <div class="card">
+    <div class="card-title">Add / Edit Employee</div>
+    <div class="grid3">
+      <div>
+        <label>Name</label>
+        <input type="text" id="empName" placeholder="Full name">
+      </div>
+      <div>
+        <label>Store</label>
+        <select id="empStore">
+          <option value="">Select store</option>
+          <option>McKnight (FMI144)</option>
+          <option>Hanson Ranch (FMI146)</option>
+          <option>Montgomery (FMI150)</option>
+          <option>Sarcee (FMI159)</option>
+          <option>Crowfoot (FMI162)</option>
+        </select>
+      </div>
+      <div>
+        <label>Role</label>
+        <select id="empRole">
+          <option>Team Member</option>
+          <option>Shift Leader</option>
+          <option>Driver</option>
+          <option>RGM</option>
+          <option>AM</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-red" onclick="saveEmployee()">Add Employee</button>
+  </div>
+
+  <div class="store-tabs" id="teamStoreTabs"></div>
+  <div class="emp-grid" id="empGrid"></div>
+</div>
+
+<!-- ======================== GENERATE MESSAGE ======================== -->
+<div class="tab-panel" id="tab-generate">
+  <div class="card">
+    <div class="card-title">AI Recognition Message Generator</div>
+
+    <div class="grid2">
+      <div>
+        <label>Employee Name</label>
+        <input type="text" id="genName" placeholder="e.g. Sarah">
+      </div>
+      <div>
+        <label>Message Style</label>
+        <select id="genStyle">
+          <option value="whatsapp">WhatsApp (casual, warm)</option>
+          <option value="groupchat">Group Chat Shoutout</option>
+          <option value="verbal">Verbal Script (face to face)</option>
+          <option value="written">Written / Formal Note</option>
+          <option value="email">Email to RGM praising employee</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label>Category</label>
+      <div class="cat-picker" id="genCatPicker">
+        <button class="cat-pick-btn" onclick="selectGenCat(this,'upsell')">💰 Upsell Win</button>
+        <button class="cat-pick-btn" onclick="selectGenCat(this,'guest')">⭐ Guest Experience</button>
+        <button class="cat-pick-btn" onclick="selectGenCat(this,'teamwork')">🤝 Teamwork</button>
+        <button class="cat-pick-btn" onclick="selectGenCat(this,'leadership')">🎯 Leadership</button>
+        <button class="cat-pick-btn" onclick="selectGenCat(this,'attendance')">✅ Reliability</button>
+        <button class="cat-pick-btn" onclick="selectGenCat(this,'improvement')">📈 Improvement</button>
+        <button class="cat-pick-btn" onclick="selectGenCat(this,'above')">🚀 Above & Beyond</button>
+      </div>
+      <input type="hidden" id="genCategory" value="">
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label>What specifically did they do?</label>
+      <textarea id="genDetail" style="min-height:80px" placeholder="Be specific — the more detail you give, the more personal and meaningful the message will be.&#10;&#10;e.g. During Friday dinner rush, Mike upsold drinks on almost every order and even stayed 30 minutes late to help close without being asked."></textarea>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <label>Tone</label>
+        <select id="genTone">
+          <option value="warm">Warm & Personal</option>
+          <option value="energetic">High Energy / Hype</option>
+          <option value="professional">Professional</option>
+          <option value="brief">Short & Punchy</option>
+        </select>
+      </div>
+      <div>
+        <label>Include Emoji?</label>
+        <select id="genEmoji">
+          <option value="yes">Yes — keep it fun</option>
+          <option value="no">No — keep it clean</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-big gold" onclick="generateMessage()" id="genBtn">✨ GENERATE RECOGNITION MESSAGE</button>
+    <div class="error-box" id="genError"></div>
+
+    <div id="genOutputWrap" style="display:none">
+      <div class="msg-output" id="genOutput"></div>
+      <div class="msg-actions">
+        <button class="btn btn-gold" onclick="copyMessage()">📋 Copy Message</button>
+        <button class="btn btn-ghost" onclick="generateMessage()">🔄 Regenerate</button>
+        <button class="btn btn-ghost" onclick="saveFromGenerator()">⭐ Save to History</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick message templates -->
+  <div class="card">
+    <div class="card-title">Quick Templates (No AI needed)</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div id="templateList"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ======================== IDEAS ======================== -->
+<div class="tab-panel" id="tab-ideas">
+
+  <div class="card">
+    <div class="card-title">What to Look For — Recognition Triggers</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:14px;line-height:1.6">Use these as a checklist during store visits or when reviewing the week. Any YES is a recognition opportunity.</div>
+    <div id="ideasChecklist"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">AI Idea Spark — Can't Think of Anyone?</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:14px;line-height:1.5">Describe what's been happening at a store this week and get specific recognition ideas back.</div>
+    <div class="grid2">
+      <div>
+        <label>Store</label>
+        <select id="ideaStore">
+          <option value="">Select store</option>
+          <option>McKnight (FMI144)</option>
+          <option>Hanson Ranch (FMI146)</option>
+          <option>Montgomery (FMI150)</option>
+          <option>Sarcee (FMI159)</option>
+          <option>Crowfoot (FMI162)</option>
+        </select>
+      </div>
+      <div>
+        <label>This Week's Context</label>
+        <input type="text" id="ideaContext" placeholder="e.g. busy weekend, new staff, short-handed">
+      </div>
+    </div>
+    <div style="margin-bottom:12px">
+      <label>What happened this week? (anything you noticed)</label>
+      <textarea id="ideaDetail" style="min-height:80px" placeholder="e.g. Store was short-staffed on Saturday, RGM stayed late, new hire started and seemed nervous, sales were up 8%..."></textarea>
+    </div>
+    <button class="btn-big gold" onclick="generateIdeas()" id="ideaBtn">💡 GIVE ME RECOGNITION IDEAS</button>
+    <div class="error-box" id="ideaError"></div>
+    <div id="ideaOutputWrap" style="display:none;margin-top:14px">
+      <div class="msg-output" id="ideaOutput" style="white-space:pre-wrap"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================== REWARDS ======================== -->
+<div class="tab-panel" id="tab-rewards">
+
+  <div class="card">
+    <div class="card-title">Free Recognition Ideas (Cost: $0)</div>
+    <div id="freeRewards"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Budget Recognition Ideas ($1–$20)</div>
+    <div id="budgetRewards"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Premium Recognition ($20–$100)</div>
+    <div id="premiumRewards"></div>
+  </div>
+
+</div>
+
+<!-- ======================== REMINDERS ======================== -->
+<div class="tab-panel" id="tab-reminders">
+
+  <div class="card">
+    <div class="card-title">Recognition Reminder Settings</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:16px;line-height:1.5">Set up reminders so you never forget to recognize your team. Reminders appear as browser notifications — make sure to allow notifications when prompted.</div>
+
+    <div class="grid2" style="margin-bottom:14px">
+      <div>
+        <label>Reminder Frequency</label>
+        <select id="reminderFreq">
+          <option value="daily">Daily</option>
+          <option value="weekdays">Weekdays only (Mon–Fri)</option>
+          <option value="weekly">Weekly</option>
+          <option value="custom">Custom days</option>
+        </select>
+      </div>
+      <div>
+        <label>Reminder Time</label>
+        <input type="time" id="reminderTime" value="09:00">
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px" id="customDaysRow" style="display:none">
+      <label>Select Days</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px" id="dayPicker">
+        <button class="cat-pick-btn selected" data-day="1" onclick="toggleDay(this)">Mon</button>
+        <button class="cat-pick-btn selected" data-day="2" onclick="toggleDay(this)">Tue</button>
+        <button class="cat-pick-btn selected" data-day="3" onclick="toggleDay(this)">Wed</button>
+        <button class="cat-pick-btn selected" data-day="4" onclick="toggleDay(this)">Thu</button>
+        <button class="cat-pick-btn selected" data-day="5" onclick="toggleDay(this)">Fri</button>
+        <button class="cat-pick-btn" data-day="6" onclick="toggleDay(this)">Sat</button>
+        <button class="cat-pick-btn" data-day="0" onclick="toggleDay(this)">Sun</button>
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px">
+      <label>Reminder Goal — recognitions per week</label>
+      <select id="reminderGoal">
+        <option value="1">At least 1 per week</option>
+        <option value="3" selected>At least 3 per week</option>
+        <option value="5">At least 5 per week</option>
+        <option value="daily">At least 1 per day</option>
+      </select>
+    </div>
+
+    <button class="btn-big" onclick="saveReminders()" id="reminderBtn">🔔 ENABLE REMINDERS</button>
+    <div id="reminderStatus" style="margin-top:12px;font-size:13px;color:var(--mid)"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Recognition Goal Tracker — This Week</div>
+    <div id="weekGoalTracker"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Recognition Commitment</div>
+    <div style="font-size:13px;color:var(--mid);line-height:1.7">
+      Research shows employees who feel recognized are <strong style="color:var(--black)">63% more engaged</strong> and <strong style="color:var(--black)">4x more likely to stay</strong>. As Area Coach across 5 stores with ~50+ employees, even one recognition per person per month makes a measurable difference in turnover and morale.<br><br>
+      <strong style="color:var(--red)">Your goal:</strong> Minimum 1 recognition per employee every 14 days. The tool will alert you when someone is overdue.
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ============ STATE ============
+let employees = JSON.parse(localStorage.getItem('ph_employees') || '[]');
+let recognitions = JSON.parse(localStorage.getItem('ph_recognitions') || '[]');
+let selectedCat = '';
+let selectedRtype = '';
+let selectedGenCat = '';
+let historyStoreFilter = 'all';
+let teamStoreFilter = 'all';
+
+const STORES = ['McKnight (FMI144)', 'Hanson Ranch (FMI146)', 'Montgomery (FMI150)', 'Sarcee (FMI159)', 'Crowfoot (FMI162)'];
+const STORE_COLORS = ['#EE3124','#2D9E6B','#2563EB','#9333EA','#E07B2A'];
+
+const CAT_LABELS = { upsell:'Upsell Win', guest:'Guest Experience', teamwork:'Teamwork', leadership:'Leadership', attendance:'Reliability', improvement:'Improvement', above:'Above & Beyond', other:'Other' };
+const CAT_EMOJI = { upsell:'💰', guest:'⭐', teamwork:'🤝', leadership:'🎯', attendance:'✅', improvement:'📈', above:'🚀', other:'💬' };
+
+const TEMPLATES = [
+  { cat:'upsell', text: (name) => `Hey ${name}! 🌟 Just wanted to say — your upselling game today was 🔥 Customers love when you offer them options. Keep it up!` },
+  { cat:'guest', text: (name) => `${name} — got great feedback about you today. A customer noticed how friendly and helpful you were. That's exactly what Pizza Hut is all about. Thank you! ⭐` },
+  { cat:'teamwork', text: (name) => `Shoutout to ${name} for stepping up and helping the team today without being asked. That attitude makes everything run smoother. We see it! 💪` },
+  { cat:'above', text: (name) => `${name} went above and beyond today — and it didn't go unnoticed. That extra effort you put in makes a real difference. Proud to have you on the team! 🚀` },
+  { cat:'improvement', text: (name) => `${name} — I've been watching your progress and I have to say, the improvement is real. You should be proud of how far you've come. Keep pushing! 📈` },
+  { cat:'attendance', text: (name) => `Quick shoutout to ${name} for always showing up, always on time, always ready. That reliability is something the whole team counts on. Thank you! ✅` },
+  { cat:'leadership', text: (name) => `${name} showed real leadership today — kept the team together, stayed calm under pressure, and led by example. That's the kind of attitude that builds great restaurants. 🎯` },
+];
+
+// ============ INIT ============
+function init() {
+  document.getElementById('recDate').value = new Date().toISOString().split('T')[0];
+  const saved = localStorage.getItem('ph_api_key');
+  if (saved) document.getElementById('apiKeyInput').value = saved;
+  updateStreak();
+  renderDashboard();
+  buildStoreTabs();
+  renderHistory();
+  renderTeam();
+  renderTemplates();
+}
+
+// ============ TABS ============
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  const map = { dashboard:0, recognize:1, history:2, team:3, generate:4 };
+  document.querySelectorAll('.tab')[map[name]]?.classList.add('active');
+  if (name === 'dashboard') renderDashboard();
+  if (name === 'history') renderHistory();
+  if (name === 'team') renderTeam();
+}
+
+// ============ SETTINGS ============
+function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
+function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
+function closeSettingsOutside(e) { if (e.target === document.getElementById('settingsModal')) closeSettings(); }
+function saveSettings() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (key) localStorage.setItem('ph_api_key', key);
+  closeSettings();
+}
+
+// ============ STREAK ============
+function updateStreak() {
+  const today = new Date().toDateString();
+  const lastDate = localStorage.getItem('ph_last_rec_date');
+  let streak = parseInt(localStorage.getItem('ph_streak') || '0');
+  if (recognitions.length > 0) {
+    const lastRec = new Date(recognitions[0].date).toDateString();
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (lastRec === today) {
+      if (lastDate !== today) { streak++; localStorage.setItem('ph_streak', streak); localStorage.setItem('ph_last_rec_date', today); }
+    } else if (lastRec !== yesterday && lastRec !== today) { streak = 0; localStorage.setItem('ph_streak', 0); }
+  }
+  document.getElementById('streakBadge').textContent = `🔥 ${streak} day streak`;
+}
+
+// ============ DASHBOARD ============
+function renderDashboard() {
+  const total = recognitions.length;
+  const thisWeek = recognitions.filter(r => {
+    const d = new Date(r.date); const now = new Date();
+    const diff = (now - d) / (1000 * 60 * 60 * 24);
+    return diff <= 7;
+  }).length;
+  const uniqueEmp = new Set(recognitions.map(r => r.employee)).size;
+  const overdue = getOverdueEmployees();
+
+  document.getElementById('dashKPIs').innerHTML = `
+    <div class="dash-kpi highlight"><div class="dash-kpi-val">${total}</div><div class="dash-kpi-lbl">Total Given</div></div>
+    <div class="dash-kpi green-k"><div class="dash-kpi-val">${thisWeek}</div><div class="dash-kpi-lbl">This Week</div></div>
+    <div class="dash-kpi"><div class="dash-kpi-val" style="color:white">${uniqueEmp}</div><div class="dash-kpi-lbl">Employees Recognized</div></div>
+    <div class="dash-kpi red-k"><div class="dash-kpi-val">${overdue.length}</div><div class="dash-kpi-lbl">Overdue (14d+)</div></div>
+  `;
+
+  // Overdue
+  if (overdue.length > 0) {
+    document.getElementById('overdueStrip').style.display = 'block';
+    document.getElementById('overdueNames').innerHTML = overdue.map(e =>
+      `<span class="overdue-pill" onclick="quickRecognize('${e.name}')" title="Click to recognize">${e.name} — ${e.store.split(' ')[0]}</span>`
+    ).join('');
+  } else {
+    document.getElementById('overdueStrip').style.display = 'none';
+  }
+
+  // Recent
+  const recent = recognitions.slice(0, 5);
+  document.getElementById('dashRecentList').innerHTML = recent.length
+    ? recent.map(r => recCardHTML(r, false)).join('')
+    : '<div style="text-align:center;padding:24px;color:var(--mid);font-size:13px">No recognitions yet. Start by adding your first one! ⭐</div>';
+
+  // Store breakdown
+  const byStore = {};
+  STORES.forEach(s => byStore[s] = recognitions.filter(r => r.store === s).length);
+  document.getElementById('storeBreakdown').innerHTML = STORES.map((s, i) => {
+    const count = byStore[s];
+    const max = Math.max(...Object.values(byStore)) || 1;
+    const pct = Math.round((count / max) * 100);
+    return `<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:600;width:140px;color:var(--mid)">${s.split(' ')[0]}</div>
+      <div style="flex:1;height:8px;background:#f0e8e0;border-radius:99px;overflow:hidden">
+        <div style="width:${pct}%;height:100%;background:${STORE_COLORS[i]};border-radius:99px;transition:width 0.8s"></div>
+      </div>
+      <div style="font-family:'Bebas Neue';font-size:18px;color:${STORE_COLORS[i]};min-width:28px;text-align:right">${count}</div>
+    </div>`;
+  }).join('');
+}
+
+function getOverdueEmployees() {
+  const now = new Date();
+  return employees.filter(e => {
+    const recs = recognitions.filter(r => r.employee === e.name && r.store === e.store);
+    if (recs.length === 0) return true;
+    const last = new Date(recs[0].date);
+    return (now - last) / (1000 * 60 * 60 * 24) > 14;
+  });
+}
+
+function quickRecognize(name) {
+  document.getElementById('genName').value = name;
+  switchTab('generate');
+}
+
+// ============ RECOGNITION CARDS ============
+function recCardHTML(r, showDelete = true) {
+  const catClass = 'cat-' + (r.category || 'other');
+  const emoji = CAT_EMOJI[r.category] || '💬';
+  const catLabel = CAT_LABELS[r.category] || 'Other';
+  const dateStr = new Date(r.date).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+  return `<div class="rec-card" id="rec-${r.id}">
+    <div class="rec-emoji">${emoji}</div>
+    <div class="rec-body">
+      <div class="rec-top">
+        <div class="rec-name">${r.employee}</div>
+        <div class="rec-store">${r.store?.split(' ')[0] || ''}</div>
+        <span class="rec-category ${catClass}">${catLabel}</span>
+        ${r.type ? `<span style="font-size:10px;color:#bbb">${r.type}</span>` : ''}
+        <div class="rec-date">${dateStr}</div>
+      </div>
+      ${r.note ? `<div class="rec-note">${r.note}</div>` : ''}
+    </div>
+    ${showDelete ? `<div class="rec-actions"><button class="btn btn-danger" style="font-size:11px;padding:4px 10px" onclick="deleteRec('${r.id}')">✕</button></div>` : ''}
+  </div>`;
+}
+
+// ============ SAVE RECOGNITION ============
+function selectCat(btn, cat) {
+  document.querySelectorAll('#tab-recognize .cat-pick-btn').forEach(b => {
+    if (!b.id?.startsWith('rtype')) b.classList.remove('selected');
+  });
+  btn.classList.add('selected');
+  selectedCat = cat;
+  document.getElementById('recCategory').value = cat;
+}
+
+function selectRtype(type) {
+  ['verbal','whatsapp','groupchat','written'].forEach(t => {
+    document.getElementById('rtype-' + t)?.classList.remove('selected');
+  });
+  document.getElementById('rtype-' + type)?.classList.add('selected');
+  selectedRtype = type;
+  document.getElementById('recType').value = type;
+}
+
+function saveRecognition() {
+  const employee = document.getElementById('recEmployee').value;
+  const store = document.getElementById('recStore').value;
+  const date = document.getElementById('recDate').value;
+  const note = document.getElementById('recNote').value.trim();
+  const category = document.getElementById('recCategory').value;
+  const type = document.getElementById('recType').value;
+
+  if (!employee || employee === 'Select store first' || !store) {
+    document.getElementById('recError').style.display = 'block';
+    document.getElementById('recError').textContent = 'Please select a store and employee.';
+    return;
+  }
+  if (!category) {
+    document.getElementById('recError').style.display = 'block';
+    document.getElementById('recError').textContent = 'Please select a recognition category.';
+    return;
+  }
+
+  const rec = { id: 'r_' + Date.now(), employee, store, date, note, category, type, createdAt: new Date().toISOString() };
+  recognitions.unshift(rec);
+  localStorage.setItem('ph_recognitions', JSON.stringify(recognitions));
+
+  updateStreak();
+
+  // Reset form
+  document.getElementById('recNote').value = '';
+  document.getElementById('recEmployee').value = '';
+  document.getElementById('recCategory').value = '';
+  document.getElementById('recType').value = '';
+  selectedCat = ''; selectedRtype = '';
+  document.querySelectorAll('.cat-pick-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('recError').style.display = 'none';
+
+  // Show success flash
+  const btn = document.querySelector('#tab-recognize .btn-big');
+  btn.textContent = '✅ SAVED!';
+  btn.style.background = 'var(--green)';
+  setTimeout(() => { btn.textContent = 'SAVE RECOGNITION ⭐'; btn.style.background = ''; }, 2000);
+}
+
+function deleteRec(id) {
+  if (!confirm('Delete this recognition?')) return;
+  recognitions = recognitions.filter(r => r.id !== id);
+  localStorage.setItem('ph_recognitions', JSON.stringify(recognitions));
+  renderHistory(); renderDashboard();
+}
+
+// ============ HISTORY ============
+function buildStoreTabs() {
+  const stores = ['all', ...STORES];
+  const historyTabsEl = document.getElementById('historyStoreTabs');
+  const teamTabsEl = document.getElementById('teamStoreTabs');
+  historyTabsEl.innerHTML = stores.map(s =>
+    `<div class="store-tab ${s === 'all' ? 'active' : ''}" onclick="setHistoryStore('${s}',this)">${s === 'all' ? 'All Stores' : s.split(' ')[0]}</div>`
+  ).join('');
+  teamTabsEl.innerHTML = stores.map(s =>
+    `<div class="store-tab ${s === 'all' ? 'active' : ''}" onclick="setTeamStore('${s}',this)">${s === 'all' ? 'All Stores' : s.split(' ')[0]}</div>`
+  ).join('');
+}
+
+function setHistoryStore(store, el) {
+  historyStoreFilter = store;
+  document.querySelectorAll('#historyStoreTabs .store-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderHistory();
+}
+
+function renderHistory() {
+  const search = document.getElementById('historySearch')?.value.toLowerCase() || '';
+  let filtered = recognitions;
+  if (historyStoreFilter !== 'all') filtered = filtered.filter(r => r.store === historyStoreFilter);
+  if (search) filtered = filtered.filter(r => r.employee?.toLowerCase().includes(search));
+  const list = document.getElementById('historyList');
+  list.innerHTML = filtered.length
+    ? filtered.map(r => recCardHTML(r, true)).join('')
+    : '<div style="text-align:center;padding:32px;color:var(--mid);font-size:13px">No recognitions found.</div>';
+}
+
+// ============ TEAM ============
+function saveEmployee() {
+  const name = document.getElementById('empName').value.trim();
+  const store = document.getElementById('empStore').value;
+  const role = document.getElementById('empRole').value;
+  if (!name || !store) { alert('Please enter name and store.'); return; }
+  if (employees.find(e => e.name === name && e.store === store)) { alert('Employee already exists.'); return; }
+  employees.push({ id: 'e_' + Date.now(), name, store, role });
+  localStorage.setItem('ph_employees', JSON.stringify(employees));
+  document.getElementById('empName').value = '';
+  renderTeam();
+}
+
+function deleteEmployee(id) {
+  if (!confirm('Remove this employee?')) return;
+  employees = employees.filter(e => e.id !== id);
+  localStorage.setItem('ph_employees', JSON.stringify(employees));
+  renderTeam();
+}
+
+function setTeamStore(store, el) {
+  teamStoreFilter = store;
+  document.querySelectorAll('#teamStoreTabs .store-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderTeam();
+}
+
+function renderTeam() {
+  let filtered = employees;
+  if (teamStoreFilter !== 'all') filtered = filtered.filter(e => e.store === teamStoreFilter);
+  const grid = document.getElementById('empGrid');
+  if (!filtered.length) { grid.innerHTML = '<div style="color:var(--mid);font-size:13px;padding:16px">No employees added yet. Add your team above.</div>'; return; }
+
+  grid.innerHTML = filtered.map(e => {
+    const recs = recognitions.filter(r => r.employee === e.name && r.store === e.store);
+    const last = recs.length ? new Date(recs[0].date) : null;
+    const daysSince = last ? Math.floor((new Date() - last) / (1000 * 60 * 60 * 24)) : null;
+    const overdue = daysSince === null || daysSince > 14;
+    const storeIdx = STORES.indexOf(e.store);
+    const color = STORE_COLORS[storeIdx] || '#888';
+    const initials = e.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    return `<div class="emp-card">
+      <div class="emp-card-top">
+        <div class="emp-avatar" style="background:${color}">${initials}</div>
+        <div>
+          <div class="emp-info-name">${e.name}</div>
+          <div class="emp-info-role">${e.role} · ${e.store?.split(' ')[0]}</div>
+        </div>
+      </div>
+      <div class="emp-stats">
+        <div class="emp-stat"><strong>${recs.length}</strong> recognitions</div>
+      </div>
+      <div class="emp-last ${overdue ? 'emp-overdue' : ''}">
+        ${daysSince === null ? '⚠️ Never recognized' : daysSince === 0 ? '✅ Recognized today' : daysSince <= 7 ? `✅ ${daysSince}d ago` : `⚠️ ${daysSince}d ago`}
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <button class="btn btn-red" style="font-size:11px;padding:4px 10px;flex:1" onclick="quickRecognize('${e.name}')">✨ Recognize</button>
+        <button class="btn btn-danger" style="font-size:11px;padding:4px 8px" onclick="deleteEmployee('${e.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function populateEmployees() {
+  const store = document.getElementById('recStore').value;
+  const sel = document.getElementById('recEmployee');
+  const storeEmps = employees.filter(e => e.store === store);
+  if (!store) { sel.innerHTML = '<option>Select store first</option>'; return; }
+  if (!storeEmps.length) {
+    sel.innerHTML = '<option>No employees — add in Team tab</option>';
+    return;
+  }
+  sel.innerHTML = '<option value="">Select employee</option>' + storeEmps.map(e => `<option>${e.name}</option>`).join('');
+}
+
+// ============ GENERATE MESSAGE ============
+function selectGenCat(btn, cat) {
+  document.querySelectorAll('#genCatPicker .cat-pick-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedGenCat = cat;
+  document.getElementById('genCategory').value = cat;
+}
+
+async function generateMessage() {
+  const apiKey = localStorage.getItem('ph_api_key');
+  if (!apiKey) { document.getElementById('genError').style.display = 'block'; document.getElementById('genError').textContent = 'Please set your API key via the ⚙️ button.'; return; }
+
+  const name = document.getElementById('genName').value.trim();
+  const style = document.getElementById('genStyle').value;
+  const category = document.getElementById('genCategory').value;
+  const detail = document.getElementById('genDetail').value.trim();
+  const tone = document.getElementById('genTone').value;
+  const emoji = document.getElementById('genEmoji').value;
+
+  if (!name) { document.getElementById('genError').style.display = 'block'; document.getElementById('genError').textContent = 'Please enter the employee name.'; return; }
+  if (!detail) { document.getElementById('genError').style.display = 'block'; document.getElementById('genError').textContent = 'Please describe what they did.'; return; }
+
+  document.getElementById('genError').style.display = 'none';
+  const btn = document.getElementById('genBtn');
+  btn.innerHTML = '<span class="spinner"></span> GENERATING...';
+  btn.disabled = true;
+  document.getElementById('genOutputWrap').style.display = 'none';
+
+  const styleDesc = { whatsapp:'casual WhatsApp message, conversational, personal', groupchat:'group chat shoutout, energetic, public praise', verbal:'verbal script for face-to-face recognition, warm and direct', written:'written note or card, heartfelt', email:'professional email to the RGM praising the employee' };
+  const catDesc = CAT_LABELS[category] || 'general performance';
+
+  const prompt = `You are an Area Coach at Pizza Hut in Calgary writing a recognition message.
+
+Employee name: ${name}
+Recognition category: ${catDesc}
+What they did: ${detail}
+Message style: ${styleDesc[style] || style}
+Tone: ${tone}
+Use emoji: ${emoji === 'yes' ? 'yes, naturally placed' : 'no emoji'}
+
+Write a single recognition message. Make it specific, genuine, and personal — reference what they actually did. Do not be generic. No preamble, just the message itself.`;
+
+  try {
+    const resp = await fetch('https://pizza-proxy.vaghela-mihir91.workers.dev/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 400, messages: [{ role: 'user', content: prompt }] })
+    });
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
+    const msg = data.content.map(b => b.text || '').join('').trim();
+    document.getElementById('genOutput').textContent = msg;
+    document.getElementById('genOutputWrap').style.display = 'block';
+  } catch (err) {
+    document.getElementById('genError').style.display = 'block';
+    document.getElementById('genError').textContent = 'Generation failed: ' + err.message;
+  }
+
+  btn.innerHTML = '✨ GENERATE RECOGNITION MESSAGE';
+  btn.disabled = false;
+}
+
+function copyMessage() {
+  const text = document.getElementById('genOutput').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Message', 2000);
+  });
+}
+
+function saveFromGenerator() {
+  const name = document.getElementById('genName').value.trim();
+  const cat = document.getElementById('genCategory').value;
+  const note = document.getElementById('genOutput').textContent;
+  if (!name) { alert('Please enter employee name first.'); return; }
+  const rec = { id: 'r_' + Date.now(), employee: name, store: '', date: new Date().toISOString().split('T')[0], note, category: cat, type: document.getElementById('genStyle').value, createdAt: new Date().toISOString() };
+  recognitions.unshift(rec);
+  localStorage.setItem('ph_recognitions', JSON.stringify(recognitions));
+  alert('Saved to recognition history!');
+}
+
+// ============ TEMPLATES ============
+function renderTemplates() {
+  const list = document.getElementById('templateList');
+  list.innerHTML = TEMPLATES.map((t, i) => {
+    const emoji = CAT_EMOJI[t.cat] || '💬';
+    const label = CAT_LABELS[t.cat] || 'Other';
+    return `<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--mid)">${emoji} ${label}</span>
+        <button class="btn btn-ghost" style="font-size:11px;padding:3px 10px" onclick="useTemplate(${i})">Use This</button>
+      </div>
+      <div style="font-size:13px;color:var(--mid);line-height:1.5">${t.text('[Name]')}</div>
+    </div>`;
+  }).join('');
+}
+
+function useTemplate(i) {
+  const name = prompt('Enter employee name:');
+  if (!name) return;
+  const msg = TEMPLATES[i].text(name);
+  navigator.clipboard.writeText(msg).then(() => alert('Message copied to clipboard!\n\n' + msg)).catch(() => alert(msg));
+}
+
+
+// ============ NEW TAB ROUTING ============
+const origSwitchTab = switchTab;
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('tab-' + name);
+  if (panel) panel.classList.add('active');
+  const map = { dashboard:0, recognize:1, history:2, team:3, generate:4, ideas:5, rewards:6, reminders:7 };
+  if (map[name] !== undefined) document.querySelectorAll('.tab')[map[name]]?.classList.add('active');
+  if (name === 'dashboard') renderDashboard();
+  if (name === 'history') renderHistory();
+  if (name === 'team') renderTeam();
+  if (name === 'ideas') renderIdeas();
+  if (name === 'rewards') renderRewards();
+  if (name === 'reminders') renderReminderStatus();
+}
+
+// ============ IDEAS CHECKLIST ============
+const IDEA_TRIGGERS = [
+  { cat:'upsell', icon:'💰', title:'Upsell Wins', items:['Did anyone upsell drinks on most orders?','Did someone mention a promo without being asked?','Did an employee turn a single item into a full combo?','Did someone upsell on a complaint call?'] },
+  { cat:'guest', icon:'⭐', title:'Guest Experience', items:['Did a customer give a compliment — in person, on Google, or on SMG?','Did someone handle a complaint really well?','Did anyone go out of their way to make a customer feel welcome?','Did someone remember a regular customer's order?'] },
+  { cat:'teamwork', icon:'🤝', title:'Teamwork Moments', items:['Did someone help a coworker without being asked?','Did anyone cover a shift last minute?','Did someone train or mentor a new hire?','Did anyone step up when the team was short-staffed?'] },
+  { cat:'leadership', icon:'🎯', title:'Leadership Behaviour', items:['Did an RGM handle a tough situation calmly?','Did a shift leader run a clean shift under pressure?','Did anyone make a good decision on their own without calling you?','Did someone motivate the rest of the team?'] },
+  { cat:'attendance', icon:'✅', title:'Reliability', items:['Is there someone who hasn't missed a shift in months?','Did anyone show up on time every day this week?','Did someone stay late without complaining?','Did anyone come in on their day off when needed?'] },
+  { cat:'improvement', icon:'📈', title:'Growth & Improvement', items:['Has a new hire improved significantly since starting?','Did someone master a new skill or station?','Did you notice better order accuracy from someone?','Has someone's speed improved noticeably?'] },
+  { cat:'above', icon:'🚀', title:'Above & Beyond', items:['Did someone do something that surprised you?','Did anyone fix a problem before you even knew about it?','Did someone take initiative on something not in their job description?','Did an employee represent Pizza Hut well outside of work?'] },
+];
+
+function renderIdeas() {
+  const el = document.getElementById('ideasChecklist');
+  el.innerHTML = IDEA_TRIGGERS.map(group => `
+    <div style="margin-bottom:18px">
+      <div style="font-family:'Bebas Neue';font-size:14px;letter-spacing:1px;color:var(--black);margin-bottom:8px">${group.icon} ${group.title}</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        ${group.items.map(item => `
+          <label style="display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:var(--bg);border-radius:7px;cursor:pointer;font-size:13px;color:var(--mid);font-weight:400;letter-spacing:0;text-transform:none">
+            <input type="checkbox" style="width:auto;margin-top:2px;accent-color:var(--red)" onchange="checkIdea(this,'${group.cat}')">
+            <span>${item}</span>
+          </label>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function checkIdea(checkbox, cat) {
+  if (checkbox.checked) {
+    const label = checkbox.nextElementSibling.textContent;
+    setTimeout(() => {
+      if (confirm(`Spotted something to recognize in "${label}"?\n\nGo to the Recognize tab to log it?`)) {
+        document.getElementById('recCategory').value = cat;
+        switchTab('recognize');
+      }
+    }, 100);
+  }
+}
+
+// ============ GENERATE IDEAS ============
+async function generateIdeas() {
+  const apiKey = localStorage.getItem('ph_api_key');
+  if (!apiKey) { document.getElementById('ideaError').style.display='block'; document.getElementById('ideaError').textContent='Please set your API key via the ⚙️ button.'; return; }
+  const store = document.getElementById('ideaStore').value;
+  const context = document.getElementById('ideaContext').value.trim();
+  const detail = document.getElementById('ideaDetail').value.trim();
+  if (!detail) { document.getElementById('ideaError').style.display='block'; document.getElementById('ideaError').textContent='Please describe what happened this week.'; return; }
+  document.getElementById('ideaError').style.display='none';
+  const btn = document.getElementById('ideaBtn');
+  btn.innerHTML='<span class="spinner"></span> THINKING...'; btn.disabled=true;
+  document.getElementById('ideaOutputWrap').style.display='none';
+
+  const prompt = `You are helping a Pizza Hut Area Coach in Calgary find recognition opportunities for his team.
+
+Store: ${store || 'one of his stores'}
+Context: ${context || 'regular week'}
+What happened this week: ${detail}
+
+Based on this, give him 4-6 SPECIFIC recognition ideas. For each one:
+- Name the type of behaviour to recognize (be specific, not generic)
+- Suggest WHO might deserve it based on the context (role/situation, not just "someone")
+- Give a one-line reason WHY this matters for the team
+
+Format each idea clearly with a number. Be practical and actionable. Focus on things an Area Coach can recognize immediately this week.`;
+
+  try {
+    const resp = await fetch('https://pizza-proxy.vaghela-mihir91.workers.dev/', {
+      method:'POST', headers:{'Content-Type':'application/json','x-api-key':apiKey},
+      body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:prompt}]})
+    });
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
+    const msg = data.content.map(b => b.text||'').join('').trim();
+    document.getElementById('ideaOutput').textContent = msg;
+    document.getElementById('ideaOutputWrap').style.display='block';
+  } catch(err) {
+    document.getElementById('ideaError').style.display='block';
+    document.getElementById('ideaError').textContent='Failed: ' + err.message;
+  }
+  btn.innerHTML='💡 GIVE ME RECOGNITION IDEAS'; btn.disabled=false;
+}
+
+// ============ REWARDS ============
+const FREE_REWARDS = [
+  { icon:'📢', title:'Public Shoutout in Group Chat', desc:'Post a specific praise message in the store WhatsApp group. Name them, say exactly what they did, and why it matters. Takes 2 minutes, lasts in the chat forever.' },
+  { icon:'🗣️', title:'Face-to-Face Verbal Praise', desc:'Pull them aside privately or in front of the team and say what you noticed. Be specific. "I saw what you did with that complaint customer — that was impressive." Costs nothing, means everything.' },
+  { icon:'📝', title:'Handwritten Thank You Note', desc:'Leave a handwritten note in their locker or with their pay. Employees keep these for years. A $0 sticky note with genuine words beats a $10 gift card every time.' },
+  { icon:'📱', title:'Direct WhatsApp Message', desc:'Send a personal message directly to them — not in the group. Private recognition feels more genuine. Copy-paste from the generator in this tool.' },
+  { icon:'📸', title:'Team Board Recognition', desc:'Put their name and achievement on a physical board at the store. "Employee of the Week" or just "Shoutout to Sarah for ___". Free, visible, lasting.' },
+  { icon:'⭐', title:'Tell Their RGM in Writing', desc:'Email or message the RGM specifically praising the employee — and CC the employee. They feel seen at multiple levels. Costs nothing, builds loyalty.' },
+  { icon:'📊', title:'Feature in Your Region Updates', desc:'Include a "Team Win" section in your weekly AC update to your DM or peers. Employees hear about it and feel proud.' },
+  { icon:'🎯', title:'Give Them a Responsibility', desc:'Assign them a small ownership role — "You're leading the Google review push this month." Recognition through trust and responsibility is powerful.' },
+];
+
+const BUDGET_REWARDS = [
+  { icon:'☕', title:'Tim Hortons / Starbucks Gift Card — $10', desc:'Grab a $10 Tims card during your store visit. Hand it personally with a specific reason. Simple, personal, immediate. Costs $10, feels like $50.' },
+  { icon:'🍕', title:'Free Meal on Shift — $0–$8', desc:'Tell the RGM to give them a free meal during their next shift on your behalf. Easy to arrange, feels like a perk. Works within food cost.' },
+  { icon:'🧢', title:'Pizza Hut Branded Merch — $5–$15', desc:'Branded hat, hoodie, or t-shirt. Order in bulk from Pizza Hut corporate swag — costs less per unit. Employees actually wear these.' },
+  { icon:'🎬', title:'Movie Ticket — $15–$18', desc:'Cineplex general admission. Grab a pair for a top performer. Easy to buy online, meaningful to receive.' },
+  { icon:'📦', title:'Amazon Gift Card — $15–$20', desc:'Instantly sent via email. Flexible, everyone wants it. Use for top monthly performer.' },
+  { icon:'🧁', title:'Bring Treats for Their Shift — $10–$20', desc:'Show up with donuts, cupcakes, or a Costco cake for the whole shift — and publicly say it's because of that specific person. The whole team celebrates together.' },
+  { icon:'⛽', title:'Gas Card — $20', desc:'For drivers especially — a $20 gas card is incredibly practical and appreciated. Petro-Canada or Esso, available at any convenience store.' },
+  { icon:'📅', title:'Preferred Scheduling for a Month — $0', desc:'Let them pick one shift per week for a month. Zero cost, huge perceived value. Works especially well for students or parents.' },
+];
+
+const PREMIUM_REWARDS = [
+  { icon:'🎟️', title:'Cineplex VIP Experience — $30–$50', desc:'VIP cinema ticket for 2 — reclining seats, full service. A genuinely special experience for a top RGM or shift leader.' },
+  { icon:'🍽️', title:'Restaurant Gift Card — $50', desc:'Earls, Boston Pizza, or local restaurant. For an RGM who has gone above and beyond over a sustained period.' },
+  { icon:'🛒', title:'Superstore / Walmart Gift Card — $50', desc:'Extremely practical — groceries, household items. For employees with families this is more valuable than a restaurant card.' },
+  { icon:'💆', title:'Spa / Massage Gift Card — $50–$80', desc:'For an RGM who has had a tough month and pushed through. Signal that you see the effort and they deserve to recharge.' },
+  { icon:'🎮', title:'Best Buy Gift Card — $50–$100', desc:'For a younger team member who loves gaming or tech. Feels premium and personal if you know their interests.' },
+  { icon:'✈️', title:'Airbnb / Travel Credit — $100', desc:'For an exceptional RGM — a weekend away. Reserve for major milestones: 1-year anniversary, exceptional quarter, saving a struggling store.' },
+];
+
+function renderRewards() {
+  function rewardCards(arr) {
+    return arr.map(r => `
+      <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+        <div style="font-size:26px;flex-shrink:0">${r.icon}</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--black);margin-bottom:3px">${r.title}</div>
+          <div style="font-size:12.5px;color:var(--mid);line-height:1.5">${r.desc}</div>
+        </div>
+      </div>`).join('');
+  }
+  document.getElementById('freeRewards').innerHTML = rewardCards(FREE_REWARDS);
+  document.getElementById('budgetRewards').innerHTML = rewardCards(BUDGET_REWARDS);
+  document.getElementById('premiumRewards').innerHTML = rewardCards(PREMIUM_REWARDS);
+}
+
+// ============ REMINDERS ============
+function toggleDay(btn) { btn.classList.toggle('selected'); }
+
+async function saveReminders() {
+  const btn = document.getElementById('reminderBtn');
+  if ('Notification' in window) {
+    const perm = await Notification.requestPermission();
+    if (perm !== 'granted') {
+      document.getElementById('reminderStatus').innerHTML = '<span style="color:var(--red)">❌ Notifications blocked. Please allow in browser settings, then try again.</span>';
+      return;
+    }
+  }
+  const freq = document.getElementById('reminderFreq').value;
+  const time = document.getElementById('reminderTime').value;
+  const goal = document.getElementById('reminderGoal').value;
+  const settings = { freq, time, goal, enabled: true, savedAt: new Date().toISOString() };
+  localStorage.setItem('ph_reminder_settings', JSON.stringify(settings));
+  scheduleReminder(settings);
+  document.getElementById('reminderStatus').innerHTML = `<span style="color:var(--green)">✅ Reminders enabled — ${freq} at ${time}. Goal: ${goal} recognitions/week.</span>`;
+  renderReminderStatus();
+}
+
+function scheduleReminder(settings) {
+  // Clear existing
+  const existing = localStorage.getItem('ph_reminder_timer');
+  if (existing) clearTimeout(parseInt(existing));
+
+  function checkAndNotify() {
+    const now = new Date();
+    const [h, m] = settings.time.split(':').map(Number);
+    const dayOk = settings.freq === 'daily' ? true :
+                  settings.freq === 'weekdays' ? now.getDay() >= 1 && now.getDay() <= 5 :
+                  settings.freq === 'weekly' ? now.getDay() === 1 : true;
+
+    if (dayOk && now.getHours() === h && now.getMinutes() === m) {
+      const overdue = getOverdueEmployees();
+      const thisWeekRecs = recognitions.filter(r => {
+        const d = new Date(r.date);
+        return (new Date() - d) / (1000*60*60*24) <= 7;
+      }).length;
+      const goal = parseInt(settings.goal) || 3;
+      let msg = '⭐ Time to recognize your team!';
+      if (overdue.length > 0) msg = `⚠️ ${overdue.length} employee(s) overdue for recognition — ${overdue[0].name} and others.`;
+      else if (thisWeekRecs < goal) msg = `You've given ${thisWeekRecs}/${goal} recognitions this week. Keep going!`;
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('Pizza Hut Recognition Reminder', { body: msg, icon: '' });
+      }
+    }
+    // Check every minute
+    const timer = setTimeout(checkAndNotify, 60000);
+    localStorage.setItem('ph_reminder_timer', timer);
+  }
+  setTimeout(checkAndNotify, 5000);
+}
+
+function renderReminderStatus() {
+  const settings = JSON.parse(localStorage.getItem('ph_reminder_settings') || 'null');
+  if (settings) {
+    document.getElementById('reminderFreq').value = settings.freq || 'daily';
+    document.getElementById('reminderTime').value = settings.time || '09:00';
+    document.getElementById('reminderGoal').value = settings.goal || '3';
+    document.getElementById('reminderStatus').innerHTML = settings.enabled
+      ? `<span style="color:var(--green)">✅ Reminders active — ${settings.freq} at ${settings.time}</span>`
+      : '';
+  }
+
+  // Week goal tracker
+  const goal = parseInt(settings?.goal) || 3;
+  const thisWeek = recognitions.filter(r => (new Date() - new Date(r.date)) / (1000*60*60*24) <= 7);
+  const pct = Math.min(100, Math.round((thisWeek.length / goal) * 100));
+  const byStore = {};
+  STORES.forEach(s => byStore[s.split(' ')[0]] = thisWeek.filter(r => r.store === s).length);
+
+  document.getElementById('weekGoalTracker').innerHTML = `
+    <div style="margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-size:13px;font-weight:600;color:var(--black)">${thisWeek.length} of ${goal} recognitions this week</div>
+        <div style="font-family:'Bebas Neue';font-size:22px;color:${pct>=100?'var(--green)':'var(--red)'}">${pct}%</div>
+      </div>
+      <div style="height:10px;background:#f0e8e0;border-radius:99px;overflow:hidden">
+        <div style="width:${pct}%;height:100%;background:${pct>=100?'var(--green)':'var(--red)'};border-radius:99px;transition:width 0.8s"></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+      ${STORES.map((s,i) => {
+        const name = s.split(' ')[0];
+        const count = byStore[name] || 0;
+        return `<div style="text-align:center;background:var(--bg);border-radius:8px;padding:8px">
+          <div style="font-family:'Bebas Neue';font-size:22px;color:${STORE_COLORS[i]}">${count}</div>
+          <div style="font-size:10px;color:var(--mid)">${name}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+// Auto-restore reminder on page load
+(function() {
+  const settings = JSON.parse(localStorage.getItem('ph_reminder_settings') || 'null');
+  if (settings && settings.enabled) scheduleReminder(settings);
+})();
+
+init();
+
+</script>
+</body>
+</html>
