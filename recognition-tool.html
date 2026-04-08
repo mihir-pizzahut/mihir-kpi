@@ -7,142 +7,142 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --red: #EE3124; --dark-red: #C01E14;
-  --gold: #F5A623; --gold-light: #FFF3D4;
-  --black: #0f0f0f; --white: #fff;
-  --bg: #F7F3EE; --card: #ffffff;
-  --border: #E8DDD4; --mid: #888;
-  --green: #2D9E6B; --blue: #2563EB;
+  --red:#EE3124;--dred:#C01E14;--gold:#F5A623;--black:#0f0f0f;
+  --bg:#F7F3EE;--card:#fff;--border:#E8DDD4;--mid:#888;
+  --green:#2D9E6B;--blue:#2563EB;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--black); min-height: 100vh; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--black);min-height:100vh;}
 
-/* HEADER */
-header {
-  background: var(--black);
-  padding: 0 28px;
-  height: 54px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 2px solid var(--red);
-  position: sticky; top: 0; z-index: 100;
-}
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-dot { width: 28px; height: 28px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue'; font-size: 9px; color: white; line-height: 1.1; text-align: center; }
-.logo h1 { font-family: 'Bebas Neue'; color: white; font-size: 20px; letter-spacing: 2px; }
-.header-right { display: flex; align-items: center; gap: 10px; }
-.streak-badge { background: var(--gold); color: var(--black); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 99px; letter-spacing: 0.5px; }
+header{background:var(--black);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--red);position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-dot{width:28px;height:28px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:9px;color:#fff;line-height:1.1;text-align:center;}
+.logo h1{font-family:'Bebas Neue';color:#fff;font-size:20px;letter-spacing:2px;}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.streak{background:var(--gold);color:var(--black);font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px;}
+.api-btn{background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.25);border-radius:7px;color:#fff;font-size:11px;font-weight:600;padding:5px 12px;cursor:pointer;letter-spacing:0.5px;}
+.api-btn:hover{background:rgba(255,255,255,0.2);}
+.api-btn.set{border-color:#4ade80;color:#4ade80;}
 
-/* TABS */
-.tabs { display: flex; background: var(--black); padding: 0 28px; gap: 2px; border-bottom: 1px solid #1a1a1a; overflow-x: auto; }
-.tab { padding: 10px 18px; font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #555; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
-.tab:hover { color: #888; }
-.tab.active { color: white; border-bottom-color: var(--gold); }
+.tabs{display:flex;background:var(--black);padding:0 24px;gap:2px;border-bottom:1px solid #1a1a1a;overflow-x:auto;}
+.tab{padding:10px 16px;font-size:11px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:#555;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.15s;}
+.tab:hover{color:#888;}
+.tab.active{color:#fff;border-bottom-color:var(--gold);}
 
-.container { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
+.wrap{max-width:980px;margin:0 auto;padding:22px 18px 60px;}
+.panel{display:none;} .panel.active{display:block;}
 
-/* CARDS */
-.card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); padding: 20px 24px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
-.card-title { font-family: 'Bebas Neue'; font-size: 15px; letter-spacing: 1.5px; color: var(--red); margin-bottom: 14px; }
+.card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:20px 24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.ctitle{font-family:'Bebas Neue';font-size:15px;letter-spacing:1.5px;color:var(--red);margin-bottom:14px;}
 
-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mid); margin-bottom: 5px; }
-input, select, textarea { width: 100%; font-family: 'DM Sans'; font-size: 13px; border: 1.5px solid var(--border); border-radius: 7px; padding: 8px 12px; background: var(--bg); color: var(--black); outline: none; transition: border-color 0.2s; }
-input:focus, select:focus, textarea:focus { border-color: var(--red); }
-textarea { resize: vertical; line-height: 1.6; }
+label{display:block;font-size:11px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--mid);margin-bottom:5px;}
+input,select,textarea{width:100%;font-family:'DM Sans';font-size:13px;border:1.5px solid var(--border);border-radius:7px;padding:8px 12px;background:var(--bg);color:var(--black);outline:none;transition:border-color 0.2s;}
+input:focus,select:focus,textarea:focus{border-color:var(--red);}
+textarea{resize:vertical;line-height:1.6;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
 
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.btn{font-family:'DM Sans';font-size:12px;font-weight:600;border:none;border-radius:7px;padding:8px 16px;cursor:pointer;transition:all 0.15s;}
+.btn-red{background:var(--red);color:#fff;} .btn-red:hover{background:var(--dred);}
+.btn-gold{background:var(--gold);color:var(--black);} .btn-gold:hover{background:#d99010;}
+.btn-ghost{background:transparent;color:var(--mid);border:1.5px solid var(--border);} .btn-ghost:hover{border-color:var(--red);color:var(--red);}
+.btn-del{background:#fdf0f0;color:#a02020;border:1px solid #f0c0c0;font-size:11px;padding:4px 10px;}
+.big-btn{width:100%;border:none;border-radius:10px;padding:14px;font-family:'Bebas Neue';font-size:20px;letter-spacing:2px;cursor:pointer;transition:background 0.2s;margin-top:6px;}
+.big-red{background:var(--red);color:#fff;} .big-red:hover{background:var(--dred);}
+.big-gold{background:var(--gold);color:var(--black);} .big-gold:hover{background:#d99010;}
+.big-btn:disabled{opacity:0.5;cursor:not-allowed;}
 
-/* BUTTONS */
-.btn { font-family: 'DM Sans'; font-size: 12px; font-weight: 600; border: none; border-radius: 7px; padding: 8px 16px; cursor: pointer; transition: all 0.15s; letter-spacing: 0.4px; }
-.btn-red { background: var(--red); color: white; }
-.btn-red:hover { background: var(--dark-red); }
-.btn-gold { background: var(--gold); color: var(--black); }
-.btn-gold:hover { background: #e09610; }
-.btn-ghost { background: transparent; color: var(--mid); border: 1.5px solid var(--border); }
-.btn-ghost:hover { border-color: var(--red); color: var(--red); }
-.btn-danger { background: #fdf0f0; color: #a02020; border: 1px solid #f0c0c0; }
-.btn-big { width: 100%; background: var(--red); color: white; border: none; border-radius: 10px; padding: 14px; font-family: 'Bebas Neue'; font-size: 20px; letter-spacing: 2px; cursor: pointer; transition: background 0.2s; margin-top: 6px; }
-.btn-big:hover { background: var(--dark-red); }
-.btn-big.gold { background: var(--gold); color: var(--black); }
-.btn-big.gold:hover { background: #e09610; }
+/* store tabs */
+.stabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.stab{padding:5px 13px;border-radius:99px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--mid);transition:all 0.15s;}
+.stab.active{background:var(--red);color:#fff;border-color:var(--red);}
 
-/* DASHBOARD */
-.dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
-.dash-kpi { background: var(--black); border-radius: 10px; padding: 16px 18px; }
-.dash-kpi-val { font-family: 'Bebas Neue'; font-size: 36px; line-height: 1; color: white; }
-.dash-kpi-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #555; margin-top: 3px; }
-.dash-kpi.highlight .dash-kpi-val { color: var(--gold); }
-.dash-kpi.red-k .dash-kpi-val { color: var(--red); }
-.dash-kpi.green-k .dash-kpi-val { color: #4ade80; }
+/* cat pills */
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}
+.cpill{font-size:12px;padding:5px 12px;border-radius:99px;border:1.5px solid var(--border);background:#fff;color:var(--mid);cursor:pointer;transition:all 0.15s;font-weight:500;}
+.cpill.on{border-color:var(--red);background:var(--red);color:#fff;}
 
-/* OVERDUE ALERT */
-.overdue-strip { background: #fff8e6; border: 1px solid #f5d060; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; }
-.overdue-strip h4 { font-family: 'Bebas Neue'; font-size: 14px; letter-spacing: 1px; color: #a07010; margin-bottom: 8px; }
-.overdue-names { display: flex; flex-wrap: wrap; gap: 7px; }
-.overdue-pill { font-size: 12px; background: #fff3cc; border: 1px solid #f5d060; color: #7a5500; padding: 4px 12px; border-radius: 99px; font-weight: 500; }
+/* dashboard */
+.dkpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
+.dkpi{background:var(--black);border-radius:10px;padding:14px 16px;}
+.dkv{font-family:'Bebas Neue';font-size:34px;line-height:1;color:#fff;}
+.dkl{font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:#555;margin-top:3px;}
+.dkv.gold{color:var(--gold);} .dkv.grn{color:#4ade80;} .dkv.rd{color:#f87171;}
 
-/* STORE FILTER */
-.store-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-.store-tab { padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--border); background: white; color: var(--mid); transition: all 0.15s; }
-.store-tab.active { background: var(--red); color: white; border-color: var(--red); }
+.overdue{background:#fff8e6;border:1px solid #f5d060;border-radius:10px;padding:13px 16px;margin-bottom:14px;}
+.overdue h4{font-family:'Bebas Neue';font-size:13px;letter-spacing:1px;color:#a07010;margin-bottom:8px;}
+.opills{display:flex;flex-wrap:wrap;gap:6px;}
+.opill{font-size:12px;background:#fff3cc;border:1px solid #f5d060;color:#7a5500;padding:3px 11px;border-radius:99px;font-weight:500;cursor:pointer;}
 
-/* RECOGNITION CARDS */
-.rec-list { display: flex; flex-direction: column; gap: 10px; }
-.rec-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; display: flex; align-items: flex-start; gap: 14px; transition: box-shadow 0.15s; }
-.rec-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-.rec-card.pinned { border-color: var(--gold); background: #fffdf5; }
-.rec-emoji { font-size: 28px; flex-shrink: 0; line-height: 1; }
-.rec-body { flex: 1; }
-.rec-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
-.rec-name { font-size: 14px; font-weight: 700; color: var(--black); }
-.rec-store { font-size: 11px; color: var(--mid); background: #f0ebe5; padding: 2px 8px; border-radius: 99px; }
-.rec-date { font-size: 11px; color: #bbb; margin-left: auto; }
-.rec-category { font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; }
-.cat-upsell { background: #e8f7f0; color: #1a7a50; }
-.cat-guest { background: #fef3e8; color: #c25a1a; }
-.cat-teamwork { background: #e8f0fe; color: #1a56cc; }
-.cat-leadership { background: #f5e8fe; color: #7a1acc; }
-.cat-attendance { background: #e8fef0; color: #1acc5a; }
-.cat-improvement { background: #fefde8; color: #ccaa1a; }
-.cat-above { background: #fde8e8; color: #cc1a1a; }
-.cat-other { background: #f0f0f0; color: #555; }
-.rec-note { font-size: 13px; color: var(--mid); line-height: 1.5; margin-top: 4px; }
-.rec-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+/* rec cards */
+.rlist{display:flex;flex-direction:column;gap:9px;}
+.rcard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:13px 16px;display:flex;align-items:flex-start;gap:12px;}
+.rcard:hover{box-shadow:0 3px 12px rgba(0,0,0,0.07);}
+.remoji{font-size:26px;flex-shrink:0;line-height:1;}
+.rbody{flex:1;}
+.rtop{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:3px;}
+.rname{font-size:13px;font-weight:700;}
+.rstore{font-size:11px;color:var(--mid);background:#f0ebe5;padding:2px 7px;border-radius:99px;}
+.rdate{font-size:11px;color:#bbb;margin-left:auto;}
+.rcat{font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:2px 7px;border-radius:99px;}
+.c-upsell{background:#e8f7f0;color:#1a7a50;} .c-guest{background:#fef3e8;color:#c25a1a;}
+.c-teamwork{background:#e8f0fe;color:#1a56cc;} .c-leadership{background:#f5e8fe;color:#7a1acc;}
+.c-attendance{background:#e8fef0;color:#1acc5a;} .c-improvement{background:#fefde8;color:#ccaa1a;}
+.c-above{background:#fde8e8;color:#cc1a1a;} .c-other{background:#f0f0f0;color:#555;}
+.rnote{font-size:12.5px;color:var(--mid);line-height:1.5;margin-top:3px;}
 
-/* EMPLOYEE ROSTER */
-.emp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.emp-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
-.emp-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.emp-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue'; font-size: 16px; color: white; flex-shrink: 0; }
-.emp-info-name { font-size: 13px; font-weight: 700; color: var(--black); }
-.emp-info-role { font-size: 11px; color: var(--mid); }
-.emp-stats { display: flex; gap: 10px; }
-.emp-stat { font-size: 11px; color: var(--mid); }
-.emp-stat strong { color: var(--black); font-weight: 700; }
-.emp-last { font-size: 11px; color: #bbb; margin-top: 6px; }
-.emp-overdue { color: var(--red) !important; font-weight: 600; }
+/* team */
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.ecard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:13px 15px;}
+.etop{display:flex;align-items:center;gap:9px;margin-bottom:8px;}
+.eavatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:15px;color:#fff;flex-shrink:0;}
+.ename{font-size:13px;font-weight:700;}
+.erole{font-size:11px;color:var(--mid);}
+.elast{font-size:11px;color:#bbb;margin-top:5px;}
+.elast.od{color:var(--red);font-weight:600;}
 
-/* MESSAGE OUTPUT */
-.msg-output { background: #f9f6f2; border: 1px solid var(--border); border-radius: 10px; padding: 16px; font-size: 14px; line-height: 1.8; color: var(--black); white-space: pre-wrap; margin-top: 12px; min-height: 80px; }
-.msg-actions { display: flex; gap: 8px; margin-top: 10px; }
+/* msg output */
+.mout{background:#f9f6f2;border:1px solid var(--border);border-radius:9px;padding:15px;font-size:13.5px;line-height:1.8;color:var(--black);white-space:pre-wrap;margin-top:12px;min-height:70px;}
+.macts{display:flex;gap:8px;margin-top:9px;}
 
-/* CATEGORY PILLS */
-.cat-picker { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-.cat-pick-btn { font-size: 12px; padding: 5px 12px; border-radius: 99px; border: 1.5px solid var(--border); background: white; color: var(--mid); cursor: pointer; transition: all 0.15s; font-weight: 500; }
-.cat-pick-btn.selected { border-color: var(--red); background: var(--red); color: white; }
+/* reward rows */
+.rrow{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid var(--border);}
+.rrow:last-child{border-bottom:none;}
+.rico{font-size:24px;flex-shrink:0;}
+.rtitle{font-size:13px;font-weight:700;color:var(--black);margin-bottom:2px;}
+.rdesc{font-size:12.5px;color:var(--mid);line-height:1.5;}
 
-/* SPINNER */
-.spinner { width: 20px; height: 20px; border: 3px solid var(--border); border-top-color: var(--red); border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; }
-@keyframes spin { to { transform: rotate(360deg); } }
+/* idea checklist */
+.igroup{margin-bottom:16px;}
+.igtitle{font-family:'Bebas Neue';font-size:13px;letter-spacing:1px;color:var(--black);margin-bottom:7px;}
+.iitem{display:flex;align-items:flex-start;gap:9px;padding:8px 11px;background:var(--bg);border-radius:7px;margin-bottom:5px;cursor:pointer;font-size:13px;color:var(--mid);line-height:1.4;}
+.iitem input[type=checkbox]{width:auto;margin-top:2px;accent-color:var(--red);flex-shrink:0;}
 
-.error-box { display: none; background: #fdf0f0; border: 1px solid #f0c0c0; border-radius: 8px; padding: 12px; color: #a02020; font-size: 13px; margin-top: 10px; }
+/* reminders */
+.wbar{height:10px;background:#f0e8e0;border-radius:99px;overflow:hidden;margin:8px 0;}
+.wbar-fill{height:100%;border-radius:99px;transition:width 0.8s;}
+.wkpis{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px;}
+.wkpi{text-align:center;background:var(--bg);border-radius:8px;padding:8px;}
+.wkv{font-family:'Bebas Neue';font-size:22px;}
+.wkl{font-size:10px;color:var(--mid);}
 
-@media (max-width: 640px) {
-  .dash-grid { grid-template-columns: 1fr 1fr; }
-  .grid2, .grid3 { grid-template-columns: 1fr; }
-  .emp-grid { grid-template-columns: 1fr 1fr; }
+.erbox{display:none;background:#fdf0f0;border:1px solid #f0c0c0;border-radius:8px;padding:11px;color:#a02020;font-size:12.5px;margin-top:9px;}
+.spin{width:18px;height:18px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:sp 0.7s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px;}
+@keyframes sp{to{transform:rotate(360deg);}}
+
+/* modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center;}
+.modal-bg.open{display:flex;}
+.modal{background:#fff;border-radius:14px;padding:26px;width:400px;max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+.modal h3{font-family:'Bebas Neue';font-size:17px;letter-spacing:1.5px;color:var(--red);margin-bottom:6px;}
+.modal p{font-size:12px;color:var(--mid);margin-bottom:14px;line-height:1.5;}
+.modal-acts{display:flex;gap:10px;margin-top:13px;}
+
+@media(max-width:640px){
+  .dkpis{grid-template-columns:1fr 1fr;}
+  .g2,.g3{grid-template-columns:1fr;}
+  .egrid{grid-template-columns:1fr 1fr;}
+  .wkpis{grid-template-columns:repeat(3,1fr);}
 }
 </style>
 </head>
@@ -153,186 +153,146 @@ textarea { resize: vertical; line-height: 1.6; }
     <div class="logo-dot">PH</div>
     <h1>Team Recognition</h1>
   </div>
-  <div class="header-right">
-    <div class="streak-badge" id="streakBadge">🔥 0 day streak</div>
-    <button class="btn btn-ghost" style="font-size:11px" onclick="openSettings()">⚙️ API</button>
+  <div class="hdr-right">
+    <div class="streak" id="streakEl">🔥 0 day streak</div>
+    <button class="api-btn" id="apiBtnEl" onclick="openModal()">⚙️ API</button>
   </div>
 </header>
 
-<!-- Settings Modal -->
-<div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center" id="settingsModal" onclick="closeSettingsOutside(event)">
-  <div style="background:white;border-radius:14px;padding:28px;width:400px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
-    <div style="font-family:'Bebas Neue';font-size:18px;letter-spacing:1.5px;color:var(--red);margin-bottom:8px">API Settings</div>
-    <p style="font-size:12px;color:var(--mid);margin-bottom:14px;line-height:1.5">Anthropic API key — used to generate personalized recognition messages. Saved in your browser.</p>
-    <label>Anthropic API Key</label>
-    <input type="password" id="apiKeyInput" placeholder="sk-ant-..." style="margin-top:5px">
-    <div style="display:flex;gap:10px;margin-top:14px">
-      <button class="btn btn-red" style="flex:1;font-family:'Bebas Neue';font-size:16px;letter-spacing:1px" onclick="saveSettings()">SAVE</button>
-      <button class="btn btn-ghost" onclick="closeSettings()">Cancel</button>
+<div class="modal-bg" id="modalBg" onclick="bgClick(event)">
+  <div class="modal">
+    <h3>API Settings</h3>
+    <p>Anthropic API key — powers AI message generation. Saved in your browser, never shared.</p>
+    <label>API Key</label>
+    <input type="password" id="apiInp" placeholder="sk-ant-..." style="margin-top:4px">
+    <div class="modal-acts">
+      <button class="btn btn-red" style="flex:1;font-family:'Bebas Neue';font-size:16px;letter-spacing:1px" onclick="saveApi()">SAVE</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
     </div>
   </div>
 </div>
 
-<div class="tabs" id="mainTabs">
-  <div class="tab active" onclick="switchTab('dashboard')">📊 Dashboard</div>
-  <div class="tab" onclick="switchTab('recognize')">⭐ Recognize</div>
-  <div class="tab" onclick="switchTab('history')">📋 History</div>
-  <div class="tab" onclick="switchTab('team')">👥 Team</div>
-  <div class="tab" onclick="switchTab('generate')">✍️ Generate Message</div>
-  <div class="tab" onclick="switchTab('ideas')">💡 Ideas</div>
-  <div class="tab" onclick="switchTab('rewards')">🎁 Rewards</div>
-  <div class="tab" onclick="switchTab('reminders')">🔔 Reminders</div>
+<div class="tabs">
+  <div class="tab active" onclick="go('dashboard')">📊 Dashboard</div>
+  <div class="tab" onclick="go('recognize')">⭐ Recognize</div>
+  <div class="tab" onclick="go('history')">📋 History</div>
+  <div class="tab" onclick="go('team')">👥 Team</div>
+  <div class="tab" onclick="go('generate')">✍️ Generate</div>
+  <div class="tab" onclick="go('ideas')">💡 Ideas</div>
+  <div class="tab" onclick="go('rewards')">🎁 Rewards</div>
+  <div class="tab" onclick="go('reminders')">🔔 Reminders</div>
 </div>
 
-<div class="container">
+<div class="wrap">
 
-<!-- ======================== DASHBOARD ======================== -->
-<div class="tab-panel active" id="tab-dashboard">
-
-  <div class="dash-grid" id="dashKPIs"></div>
-
-  <div class="overdue-strip" id="overdueStrip" style="display:none">
-    <h4>⚠️ Overdue Recognition (14+ days)</h4>
-    <div class="overdue-names" id="overdueNames"></div>
+<!-- DASHBOARD -->
+<div class="panel active" id="p-dashboard">
+  <div class="dkpis" id="dkpis"></div>
+  <div class="overdue" id="overdueEl" style="display:none">
+    <h4>⚠️ Overdue — Not Recognized in 14+ Days</h4>
+    <div class="opills" id="opills"></div>
   </div>
-
   <div class="card">
-    <div class="card-title">Recent Recognitions</div>
-    <div class="rec-list" id="dashRecentList"></div>
+    <div class="ctitle">Recent Recognitions</div>
+    <div class="rlist" id="dashRecent"></div>
   </div>
-
   <div class="card">
-    <div class="card-title">Recognition by Store</div>
-    <div id="storeBreakdown"></div>
+    <div class="ctitle">By Store</div>
+    <div id="storeBar"></div>
   </div>
-
 </div>
 
-<!-- ======================== RECOGNIZE ======================== -->
-<div class="tab-panel" id="tab-recognize">
+<!-- RECOGNIZE -->
+<div class="panel" id="p-recognize">
   <div class="card">
-    <div class="card-title">Add Recognition</div>
-
-    <div class="grid3">
-      <div>
-        <label>Store</label>
-        <select id="recStore" onchange="populateEmployees()">
+    <div class="ctitle">Add Recognition</div>
+    <div class="g3">
+      <div><label>Store</label>
+        <select id="rStore" onchange="fillEmps()">
           <option value="">Select store</option>
-          <option>McKnight (FMI144)</option>
-          <option>Hanson Ranch (FMI146)</option>
-          <option>Montgomery (FMI150)</option>
-          <option>Sarcee (FMI159)</option>
-          <option>Crowfoot (FMI162)</option>
+          <option>McKnight (FMI144)</option><option>Hanson Ranch (FMI146)</option>
+          <option>Montgomery (FMI150)</option><option>Sarcee (FMI159)</option><option>Crowfoot (FMI162)</option>
         </select>
       </div>
-      <div>
-        <label>Employee</label>
-        <select id="recEmployee">
-          <option value="">Select store first</option>
-        </select>
-      </div>
-      <div>
-        <label>Date</label>
-        <input type="date" id="recDate">
-      </div>
+      <div><label>Employee</label><select id="rEmp"><option value="">Select store first</option></select></div>
+      <div><label>Date</label><input type="date" id="rDate"></div>
     </div>
-
     <div style="margin-bottom:12px">
       <label>Category</label>
-      <div class="cat-picker">
-        <button class="cat-pick-btn" onclick="selectCat(this,'upsell')">💰 Upsell Win</button>
-        <button class="cat-pick-btn" onclick="selectCat(this,'guest')">⭐ Guest Experience</button>
-        <button class="cat-pick-btn" onclick="selectCat(this,'teamwork')">🤝 Teamwork</button>
-        <button class="cat-pick-btn" onclick="selectCat(this,'leadership')">🎯 Leadership</button>
-        <button class="cat-pick-btn" onclick="selectCat(this,'attendance')">✅ Reliability</button>
-        <button class="cat-pick-btn" onclick="selectCat(this,'improvement')">📈 Improvement</button>
-        <button class="cat-pick-btn" onclick="selectCat(this,'above')">🚀 Above & Beyond</button>
-        <button class="cat-pick-btn" onclick="selectCat(this,'other')">💬 Other</button>
+      <div class="cats">
+        <button class="cpill" onclick="pickCat(this,'upsell')">💰 Upsell Win</button>
+        <button class="cpill" onclick="pickCat(this,'guest')">⭐ Guest Experience</button>
+        <button class="cpill" onclick="pickCat(this,'teamwork')">🤝 Teamwork</button>
+        <button class="cpill" onclick="pickCat(this,'leadership')">🎯 Leadership</button>
+        <button class="cpill" onclick="pickCat(this,'attendance')">✅ Reliability</button>
+        <button class="cpill" onclick="pickCat(this,'improvement')">📈 Improvement</button>
+        <button class="cpill" onclick="pickCat(this,'above')">🚀 Above &amp; Beyond</button>
+        <button class="cpill" onclick="pickCat(this,'other')">💬 Other</button>
       </div>
-      <input type="hidden" id="recCategory" value="">
+      <input type="hidden" id="rCat">
     </div>
-
     <div style="margin-bottom:12px">
-      <label>What did they do? (your notes)</label>
-      <textarea id="recNote" style="min-height:80px" placeholder="e.g. Upsold drinks and dessert on 4 out of 5 orders during dinner rush. Customer even commented on how helpful she was."></textarea>
+      <label>What did they do?</label>
+      <textarea id="rNote" style="min-height:75px" placeholder="Be specific — what exactly happened? e.g. Upsold drinks on 4 out of 5 orders during dinner rush, customer even left a compliment."></textarea>
     </div>
-
     <div style="margin-bottom:12px">
-      <label>Recognition Type</label>
-      <div style="display:flex;gap:8px;margin-top:4px">
-        <button class="cat-pick-btn" id="rtype-verbal" onclick="selectRtype('verbal')">🗣️ Verbal</button>
-        <button class="cat-pick-btn" id="rtype-whatsapp" onclick="selectRtype('whatsapp')">💬 WhatsApp</button>
-        <button class="cat-pick-btn" id="rtype-groupchat" onclick="selectRtype('groupchat')">👥 Group Chat</button>
-        <button class="cat-pick-btn" id="rtype-written" onclick="selectRtype('written')">📝 Written Note</button>
+      <label>How are you recognizing them?</label>
+      <div class="cats">
+        <button class="cpill" id="rt-verbal" onclick="pickType(this,'Verbal')">🗣️ Verbal</button>
+        <button class="cpill" id="rt-whatsapp" onclick="pickType(this,'WhatsApp')">💬 WhatsApp</button>
+        <button class="cpill" id="rt-group" onclick="pickType(this,'Group Chat')">👥 Group Chat</button>
+        <button class="cpill" id="rt-written" onclick="pickType(this,'Written')">📝 Written</button>
       </div>
-      <input type="hidden" id="recType" value="">
+      <input type="hidden" id="rType">
     </div>
-
-    <button class="btn-big" onclick="saveRecognition()">SAVE RECOGNITION ⭐</button>
-    <div class="error-box" id="recError"></div>
+    <button class="big-btn big-red" onclick="saveRec()">SAVE RECOGNITION ⭐</button>
+    <div class="erbox" id="recErr"></div>
   </div>
 </div>
 
-<!-- ======================== HISTORY ======================== -->
-<div class="tab-panel" id="tab-history">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
-    <div class="store-tabs" id="historyStoreTabs"></div>
-    <input type="text" id="historySearch" placeholder="Search employee..." style="width:180px" oninput="renderHistory()">
+<!-- HISTORY -->
+<div class="panel" id="p-history">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+    <div class="stabs" id="histTabs"></div>
+    <input type="text" id="histSearch" placeholder="Search name..." style="width:170px" oninput="renderHist()">
   </div>
-  <div class="rec-list" id="historyList"></div>
+  <div class="rlist" id="histList"></div>
 </div>
 
-<!-- ======================== TEAM ======================== -->
-<div class="tab-panel" id="tab-team">
+<!-- TEAM -->
+<div class="panel" id="p-team">
   <div class="card">
-    <div class="card-title">Add / Edit Employee</div>
-    <div class="grid3">
-      <div>
-        <label>Name</label>
-        <input type="text" id="empName" placeholder="Full name">
-      </div>
-      <div>
-        <label>Store</label>
-        <select id="empStore">
+    <div class="ctitle">Add Employee</div>
+    <div class="g3">
+      <div><label>Name</label><input type="text" id="eName" placeholder="Full name"></div>
+      <div><label>Store</label>
+        <select id="eStore">
           <option value="">Select store</option>
-          <option>McKnight (FMI144)</option>
-          <option>Hanson Ranch (FMI146)</option>
-          <option>Montgomery (FMI150)</option>
-          <option>Sarcee (FMI159)</option>
-          <option>Crowfoot (FMI162)</option>
+          <option>McKnight (FMI144)</option><option>Hanson Ranch (FMI146)</option>
+          <option>Montgomery (FMI150)</option><option>Sarcee (FMI159)</option><option>Crowfoot (FMI162)</option>
         </select>
       </div>
-      <div>
-        <label>Role</label>
-        <select id="empRole">
-          <option>Team Member</option>
-          <option>Shift Leader</option>
-          <option>Driver</option>
-          <option>RGM</option>
-          <option>AM</option>
+      <div><label>Role</label>
+        <select id="eRole">
+          <option>Team Member</option><option>Shift Leader</option>
+          <option>Driver</option><option>RGM</option><option>AM</option>
         </select>
       </div>
     </div>
-    <button class="btn btn-red" onclick="saveEmployee()">Add Employee</button>
+    <button class="btn btn-red" onclick="addEmp()">Add Employee</button>
   </div>
-
-  <div class="store-tabs" id="teamStoreTabs"></div>
-  <div class="emp-grid" id="empGrid"></div>
+  <div class="stabs" id="teamTabs"></div>
+  <div class="egrid" id="empGrid"></div>
 </div>
 
-<!-- ======================== GENERATE MESSAGE ======================== -->
-<div class="tab-panel" id="tab-generate">
+<!-- GENERATE -->
+<div class="panel" id="p-generate">
   <div class="card">
-    <div class="card-title">AI Recognition Message Generator</div>
-
-    <div class="grid2">
-      <div>
-        <label>Employee Name</label>
-        <input type="text" id="genName" placeholder="e.g. Sarah">
-      </div>
-      <div>
-        <label>Message Style</label>
-        <select id="genStyle">
+    <div class="ctitle">AI Message Generator</div>
+    <div class="g2">
+      <div><label>Employee Name</label><input type="text" id="gName" placeholder="e.g. Sarah"></div>
+      <div><label>Message Style</label>
+        <select id="gStyle">
           <option value="whatsapp">WhatsApp (casual, warm)</option>
           <option value="groupchat">Group Chat Shoutout</option>
           <option value="verbal">Verbal Script (face to face)</option>
@@ -341,889 +301,625 @@ textarea { resize: vertical; line-height: 1.6; }
         </select>
       </div>
     </div>
-
     <div style="margin-bottom:12px">
       <label>Category</label>
-      <div class="cat-picker" id="genCatPicker">
-        <button class="cat-pick-btn" onclick="selectGenCat(this,'upsell')">💰 Upsell Win</button>
-        <button class="cat-pick-btn" onclick="selectGenCat(this,'guest')">⭐ Guest Experience</button>
-        <button class="cat-pick-btn" onclick="selectGenCat(this,'teamwork')">🤝 Teamwork</button>
-        <button class="cat-pick-btn" onclick="selectGenCat(this,'leadership')">🎯 Leadership</button>
-        <button class="cat-pick-btn" onclick="selectGenCat(this,'attendance')">✅ Reliability</button>
-        <button class="cat-pick-btn" onclick="selectGenCat(this,'improvement')">📈 Improvement</button>
-        <button class="cat-pick-btn" onclick="selectGenCat(this,'above')">🚀 Above & Beyond</button>
+      <div class="cats">
+        <button class="cpill" onclick="pickGCat(this,'upsell')">💰 Upsell Win</button>
+        <button class="cpill" onclick="pickGCat(this,'guest')">⭐ Guest Experience</button>
+        <button class="cpill" onclick="pickGCat(this,'teamwork')">🤝 Teamwork</button>
+        <button class="cpill" onclick="pickGCat(this,'leadership')">🎯 Leadership</button>
+        <button class="cpill" onclick="pickGCat(this,'attendance')">✅ Reliability</button>
+        <button class="cpill" onclick="pickGCat(this,'improvement')">📈 Improvement</button>
+        <button class="cpill" onclick="pickGCat(this,'above')">🚀 Above &amp; Beyond</button>
       </div>
-      <input type="hidden" id="genCategory" value="">
+      <input type="hidden" id="gCat">
     </div>
-
     <div style="margin-bottom:12px">
       <label>What specifically did they do?</label>
-      <textarea id="genDetail" style="min-height:80px" placeholder="Be specific — the more detail you give, the more personal and meaningful the message will be.&#10;&#10;e.g. During Friday dinner rush, Mike upsold drinks on almost every order and even stayed 30 minutes late to help close without being asked."></textarea>
+      <textarea id="gDetail" style="min-height:75px" placeholder="Be specific — the more detail, the more personal the message.&#10;&#10;e.g. During Friday dinner rush, Mike upsold drinks on almost every order and stayed 30 min late without being asked."></textarea>
     </div>
-
-    <div class="grid2">
-      <div>
-        <label>Tone</label>
-        <select id="genTone">
-          <option value="warm">Warm & Personal</option>
-          <option value="energetic">High Energy / Hype</option>
+    <div class="g2">
+      <div><label>Tone</label>
+        <select id="gTone">
+          <option value="warm">Warm &amp; Personal</option>
+          <option value="energetic">High Energy</option>
           <option value="professional">Professional</option>
-          <option value="brief">Short & Punchy</option>
+          <option value="brief">Short &amp; Punchy</option>
         </select>
       </div>
-      <div>
-        <label>Include Emoji?</label>
-        <select id="genEmoji">
-          <option value="yes">Yes — keep it fun</option>
-          <option value="no">No — keep it clean</option>
-        </select>
+      <div><label>Emoji?</label>
+        <select id="gEmoji"><option value="yes">Yes — keep it fun</option><option value="no">No — clean</option></select>
       </div>
     </div>
-
-    <button class="btn-big gold" onclick="generateMessage()" id="genBtn">✨ GENERATE RECOGNITION MESSAGE</button>
-    <div class="error-box" id="genError"></div>
-
-    <div id="genOutputWrap" style="display:none">
-      <div class="msg-output" id="genOutput"></div>
-      <div class="msg-actions">
-        <button class="btn btn-gold" onclick="copyMessage()">📋 Copy Message</button>
-        <button class="btn btn-ghost" onclick="generateMessage()">🔄 Regenerate</button>
-        <button class="btn btn-ghost" onclick="saveFromGenerator()">⭐ Save to History</button>
+    <button class="big-btn big-gold" onclick="genMsg()" id="genBtn">✨ GENERATE RECOGNITION MESSAGE</button>
+    <div class="erbox" id="genErr"></div>
+    <div id="genOut" style="display:none">
+      <div class="mout" id="moutEl"></div>
+      <div class="macts">
+        <button class="btn btn-gold" onclick="copyMsg()">📋 Copy</button>
+        <button class="btn btn-ghost" onclick="genMsg()">🔄 Regenerate</button>
+        <button class="btn btn-ghost" onclick="saveFromGen()">⭐ Save to History</button>
       </div>
     </div>
   </div>
-
-  <!-- Quick message templates -->
   <div class="card">
-    <div class="card-title">Quick Templates (No AI needed)</div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div id="templateList"></div>
-    </div>
+    <div class="ctitle">Quick Templates — No AI Needed</div>
+    <div id="tplList"></div>
   </div>
 </div>
 
-
-<!-- ======================== IDEAS ======================== -->
-<div class="tab-panel" id="tab-ideas">
-
+<!-- IDEAS -->
+<div class="panel" id="p-ideas">
   <div class="card">
-    <div class="card-title">What to Look For — Recognition Triggers</div>
-    <div style="font-size:13px;color:var(--mid);margin-bottom:14px;line-height:1.6">Use these as a checklist during store visits or when reviewing the week. Any YES is a recognition opportunity.</div>
-    <div id="ideasChecklist"></div>
+    <div class="ctitle">Recognition Trigger Checklist</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:14px;line-height:1.6">Use this during store visits or at week-end review. Any YES = recognition opportunity.</div>
+    <div id="ideaCheck"></div>
   </div>
-
   <div class="card">
-    <div class="card-title">AI Idea Spark — Can't Think of Anyone?</div>
-    <div style="font-size:13px;color:var(--mid);margin-bottom:14px;line-height:1.5">Describe what's been happening at a store this week and get specific recognition ideas back.</div>
-    <div class="grid2">
-      <div>
-        <label>Store</label>
-        <select id="ideaStore">
+    <div class="ctitle">AI Idea Spark — Can't Think of Anyone?</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:13px;line-height:1.5">Describe what happened at a store this week and get specific recognition ideas back.</div>
+    <div class="g2">
+      <div><label>Store</label>
+        <select id="iStore">
           <option value="">Select store</option>
-          <option>McKnight (FMI144)</option>
-          <option>Hanson Ranch (FMI146)</option>
-          <option>Montgomery (FMI150)</option>
-          <option>Sarcee (FMI159)</option>
-          <option>Crowfoot (FMI162)</option>
+          <option>McKnight (FMI144)</option><option>Hanson Ranch (FMI146)</option>
+          <option>Montgomery (FMI150)</option><option>Sarcee (FMI159)</option><option>Crowfoot (FMI162)</option>
         </select>
       </div>
-      <div>
-        <label>This Week's Context</label>
-        <input type="text" id="ideaContext" placeholder="e.g. busy weekend, new staff, short-handed">
-      </div>
+      <div><label>Context (optional)</label><input type="text" id="iCtx" placeholder="e.g. busy weekend, short-handed"></div>
     </div>
     <div style="margin-bottom:12px">
-      <label>What happened this week? (anything you noticed)</label>
-      <textarea id="ideaDetail" style="min-height:80px" placeholder="e.g. Store was short-staffed on Saturday, RGM stayed late, new hire started and seemed nervous, sales were up 8%..."></textarea>
+      <label>What happened this week?</label>
+      <textarea id="iDetail" style="min-height:75px" placeholder="e.g. Store was short-staffed Saturday, RGM stayed late, new hire started nervous, sales up 8%..."></textarea>
     </div>
-    <button class="btn-big gold" onclick="generateIdeas()" id="ideaBtn">💡 GIVE ME RECOGNITION IDEAS</button>
-    <div class="error-box" id="ideaError"></div>
-    <div id="ideaOutputWrap" style="display:none;margin-top:14px">
-      <div class="msg-output" id="ideaOutput" style="white-space:pre-wrap"></div>
+    <button class="big-btn big-gold" onclick="genIdeas()" id="ideaBtn">💡 GIVE ME RECOGNITION IDEAS</button>
+    <div class="erbox" id="ideaErr"></div>
+    <div id="ideaOut" style="display:none">
+      <div class="mout" id="ideaMout"></div>
     </div>
   </div>
-
 </div>
 
-<!-- ======================== REWARDS ======================== -->
-<div class="tab-panel" id="tab-rewards">
-
+<!-- REWARDS -->
+<div class="panel" id="p-rewards">
   <div class="card">
-    <div class="card-title">Free Recognition Ideas (Cost: $0)</div>
-    <div id="freeRewards"></div>
+    <div class="ctitle">Free Recognition Ideas — $0</div>
+    <div id="freeRew"></div>
   </div>
-
   <div class="card">
-    <div class="card-title">Budget Recognition Ideas ($1–$20)</div>
-    <div id="budgetRewards"></div>
+    <div class="ctitle">Budget Recognition — $1 to $20</div>
+    <div id="budgRew"></div>
   </div>
-
   <div class="card">
-    <div class="card-title">Premium Recognition ($20–$100)</div>
-    <div id="premiumRewards"></div>
+    <div class="ctitle">Premium Recognition — $20 to $100</div>
+    <div id="premRew"></div>
   </div>
-
 </div>
 
-<!-- ======================== REMINDERS ======================== -->
-<div class="tab-panel" id="tab-reminders">
-
+<!-- REMINDERS -->
+<div class="panel" id="p-reminders">
   <div class="card">
-    <div class="card-title">Recognition Reminder Settings</div>
-    <div style="font-size:13px;color:var(--mid);margin-bottom:16px;line-height:1.5">Set up reminders so you never forget to recognize your team. Reminders appear as browser notifications — make sure to allow notifications when prompted.</div>
-
-    <div class="grid2" style="margin-bottom:14px">
-      <div>
-        <label>Reminder Frequency</label>
-        <select id="reminderFreq">
+    <div class="ctitle">Reminder Settings</div>
+    <div style="font-size:13px;color:var(--mid);margin-bottom:14px;line-height:1.5">Browser notifications remind you to recognize your team. Allow notifications when prompted.</div>
+    <div class="g2">
+      <div><label>Frequency</label>
+        <select id="remFreq">
           <option value="daily">Daily</option>
-          <option value="weekdays">Weekdays only (Mon–Fri)</option>
-          <option value="weekly">Weekly</option>
-          <option value="custom">Custom days</option>
+          <option value="weekdays">Weekdays only</option>
+          <option value="weekly">Weekly (Monday)</option>
         </select>
       </div>
-      <div>
-        <label>Reminder Time</label>
-        <input type="time" id="reminderTime" value="09:00">
-      </div>
+      <div><label>Time</label><input type="time" id="remTime" value="09:00"></div>
     </div>
-
-    <div style="margin-bottom:14px" id="customDaysRow" style="display:none">
-      <label>Select Days</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px" id="dayPicker">
-        <button class="cat-pick-btn selected" data-day="1" onclick="toggleDay(this)">Mon</button>
-        <button class="cat-pick-btn selected" data-day="2" onclick="toggleDay(this)">Tue</button>
-        <button class="cat-pick-btn selected" data-day="3" onclick="toggleDay(this)">Wed</button>
-        <button class="cat-pick-btn selected" data-day="4" onclick="toggleDay(this)">Thu</button>
-        <button class="cat-pick-btn selected" data-day="5" onclick="toggleDay(this)">Fri</button>
-        <button class="cat-pick-btn" data-day="6" onclick="toggleDay(this)">Sat</button>
-        <button class="cat-pick-btn" data-day="0" onclick="toggleDay(this)">Sun</button>
-      </div>
-    </div>
-
-    <div style="margin-bottom:14px">
-      <label>Reminder Goal — recognitions per week</label>
-      <select id="reminderGoal">
+    <div style="margin-bottom:12px">
+      <label>Weekly Goal</label>
+      <select id="remGoal">
         <option value="1">At least 1 per week</option>
         <option value="3" selected>At least 3 per week</option>
         <option value="5">At least 5 per week</option>
-        <option value="daily">At least 1 per day</option>
       </select>
     </div>
-
-    <button class="btn-big" onclick="saveReminders()" id="reminderBtn">🔔 ENABLE REMINDERS</button>
-    <div id="reminderStatus" style="margin-top:12px;font-size:13px;color:var(--mid)"></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Recognition Goal Tracker — This Week</div>
-    <div id="weekGoalTracker"></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Recognition Commitment</div>
-    <div style="font-size:13px;color:var(--mid);line-height:1.7">
-      Research shows employees who feel recognized are <strong style="color:var(--black)">63% more engaged</strong> and <strong style="color:var(--black)">4x more likely to stay</strong>. As Area Coach across 5 stores with ~50+ employees, even one recognition per person per month makes a measurable difference in turnover and morale.<br><br>
-      <strong style="color:var(--red)">Your goal:</strong> Minimum 1 recognition per employee every 14 days. The tool will alert you when someone is overdue.
-    </div>
-  </div>
-
-</div>
-
-</div><!-- /container -->
-
-<script>
-// ============ STATE ============
-let employees = JSON.parse(localStorage.getItem('ph_employees') || '[]');
-let recognitions = JSON.parse(localStorage.getItem('ph_recognitions') || '[]');
-let selectedCat = '';
-let selectedRtype = '';
-let selectedGenCat = '';
-let historyStoreFilter = 'all';
-let teamStoreFilter = 'all';
-
-const STORES = ['McKnight (FMI144)', 'Hanson Ranch (FMI146)', 'Montgomery (FMI150)', 'Sarcee (FMI159)', 'Crowfoot (FMI162)'];
-const STORE_COLORS = ['#EE3124','#2D9E6B','#2563EB','#9333EA','#E07B2A'];
-
-const CAT_LABELS = { upsell:'Upsell Win', guest:'Guest Experience', teamwork:'Teamwork', leadership:'Leadership', attendance:'Reliability', improvement:'Improvement', above:'Above & Beyond', other:'Other' };
-const CAT_EMOJI = { upsell:'💰', guest:'⭐', teamwork:'🤝', leadership:'🎯', attendance:'✅', improvement:'📈', above:'🚀', other:'💬' };
-
-const TEMPLATES = [
-  { cat:'upsell', text: (name) => `Hey ${name}! 🌟 Just wanted to say — your upselling game today was 🔥 Customers love when you offer them options. Keep it up!` },
-  { cat:'guest', text: (name) => `${name} — got great feedback about you today. A customer noticed how friendly and helpful you were. That's exactly what Pizza Hut is all about. Thank you! ⭐` },
-  { cat:'teamwork', text: (name) => `Shoutout to ${name} for stepping up and helping the team today without being asked. That attitude makes everything run smoother. We see it! 💪` },
-  { cat:'above', text: (name) => `${name} went above and beyond today — and it didn't go unnoticed. That extra effort you put in makes a real difference. Proud to have you on the team! 🚀` },
-  { cat:'improvement', text: (name) => `${name} — I've been watching your progress and I have to say, the improvement is real. You should be proud of how far you've come. Keep pushing! 📈` },
-  { cat:'attendance', text: (name) => `Quick shoutout to ${name} for always showing up, always on time, always ready. That reliability is something the whole team counts on. Thank you! ✅` },
-  { cat:'leadership', text: (name) => `${name} showed real leadership today — kept the team together, stayed calm under pressure, and led by example. That's the kind of attitude that builds great restaurants. 🎯` },
-];
-
-// ============ INIT ============
-function init() {
-  document.getElementById('recDate').value = new Date().toISOString().split('T')[0];
-  const saved = localStorage.getItem('ph_api_key');
-  if (saved) document.getElementById('apiKeyInput').value = saved;
-  updateStreak();
-  renderDashboard();
-  buildStoreTabs();
-  renderHistory();
-  renderTeam();
-  renderTemplates();
-}
-
-// ============ TABS ============
-function switchTab(name) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  const map = { dashboard:0, recognize:1, history:2, team:3, generate:4 };
-  document.querySelectorAll('.tab')[map[name]]?.classList.add('active');
-  if (name === 'dashboard') renderDashboard();
-  if (name === 'history') renderHistory();
-  if (name === 'team') renderTeam();
-}
-
-// ============ SETTINGS ============
-function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
-function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
-function closeSettingsOutside(e) { if (e.target === document.getElementById('settingsModal')) closeSettings(); }
-function saveSettings() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (key) localStorage.setItem('ph_api_key', key);
-  closeSettings();
-}
-
-// ============ STREAK ============
-function updateStreak() {
-  const today = new Date().toDateString();
-  const lastDate = localStorage.getItem('ph_last_rec_date');
-  let streak = parseInt(localStorage.getItem('ph_streak') || '0');
-  if (recognitions.length > 0) {
-    const lastRec = new Date(recognitions[0].date).toDateString();
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
-    if (lastRec === today) {
-      if (lastDate !== today) { streak++; localStorage.setItem('ph_streak', streak); localStorage.setItem('ph_last_rec_date', today); }
-    } else if (lastRec !== yesterday && lastRec !== today) { streak = 0; localStorage.setItem('ph_streak', 0); }
-  }
-  document.getElementById('streakBadge').textContent = `🔥 ${streak} day streak`;
-}
-
-// ============ DASHBOARD ============
-function renderDashboard() {
-  const total = recognitions.length;
-  const thisWeek = recognitions.filter(r => {
-    const d = new Date(r.date); const now = new Date();
-    const diff = (now - d) / (1000 * 60 * 60 * 24);
-    return diff <= 7;
-  }).length;
-  const uniqueEmp = new Set(recognitions.map(r => r.employee)).size;
-  const overdue = getOverdueEmployees();
-
-  document.getElementById('dashKPIs').innerHTML = `
-    <div class="dash-kpi highlight"><div class="dash-kpi-val">${total}</div><div class="dash-kpi-lbl">Total Given</div></div>
-    <div class="dash-kpi green-k"><div class="dash-kpi-val">${thisWeek}</div><div class="dash-kpi-lbl">This Week</div></div>
-    <div class="dash-kpi"><div class="dash-kpi-val" style="color:white">${uniqueEmp}</div><div class="dash-kpi-lbl">Employees Recognized</div></div>
-    <div class="dash-kpi red-k"><div class="dash-kpi-val">${overdue.length}</div><div class="dash-kpi-lbl">Overdue (14d+)</div></div>
-  `;
-
-  // Overdue
-  if (overdue.length > 0) {
-    document.getElementById('overdueStrip').style.display = 'block';
-    document.getElementById('overdueNames').innerHTML = overdue.map(e =>
-      `<span class="overdue-pill" onclick="quickRecognize('${e.name}')" title="Click to recognize">${e.name} — ${e.store.split(' ')[0]}</span>`
-    ).join('');
-  } else {
-    document.getElementById('overdueStrip').style.display = 'none';
-  }
-
-  // Recent
-  const recent = recognitions.slice(0, 5);
-  document.getElementById('dashRecentList').innerHTML = recent.length
-    ? recent.map(r => recCardHTML(r, false)).join('')
-    : '<div style="text-align:center;padding:24px;color:var(--mid);font-size:13px">No recognitions yet. Start by adding your first one! ⭐</div>';
-
-  // Store breakdown
-  const byStore = {};
-  STORES.forEach(s => byStore[s] = recognitions.filter(r => r.store === s).length);
-  document.getElementById('storeBreakdown').innerHTML = STORES.map((s, i) => {
-    const count = byStore[s];
-    const max = Math.max(...Object.values(byStore)) || 1;
-    const pct = Math.round((count / max) * 100);
-    return `<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <div style="font-size:12px;font-weight:600;width:140px;color:var(--mid)">${s.split(' ')[0]}</div>
-      <div style="flex:1;height:8px;background:#f0e8e0;border-radius:99px;overflow:hidden">
-        <div style="width:${pct}%;height:100%;background:${STORE_COLORS[i]};border-radius:99px;transition:width 0.8s"></div>
-      </div>
-      <div style="font-family:'Bebas Neue';font-size:18px;color:${STORE_COLORS[i]};min-width:28px;text-align:right">${count}</div>
-    </div>`;
-  }).join('');
-}
-
-function getOverdueEmployees() {
-  const now = new Date();
-  return employees.filter(e => {
-    const recs = recognitions.filter(r => r.employee === e.name && r.store === e.store);
-    if (recs.length === 0) return true;
-    const last = new Date(recs[0].date);
-    return (now - last) / (1000 * 60 * 60 * 24) > 14;
-  });
-}
-
-function quickRecognize(name) {
-  document.getElementById('genName').value = name;
-  switchTab('generate');
-}
-
-// ============ RECOGNITION CARDS ============
-function recCardHTML(r, showDelete = true) {
-  const catClass = 'cat-' + (r.category || 'other');
-  const emoji = CAT_EMOJI[r.category] || '💬';
-  const catLabel = CAT_LABELS[r.category] || 'Other';
-  const dateStr = new Date(r.date).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
-  return `<div class="rec-card" id="rec-${r.id}">
-    <div class="rec-emoji">${emoji}</div>
-    <div class="rec-body">
-      <div class="rec-top">
-        <div class="rec-name">${r.employee}</div>
-        <div class="rec-store">${r.store?.split(' ')[0] || ''}</div>
-        <span class="rec-category ${catClass}">${catLabel}</span>
-        ${r.type ? `<span style="font-size:10px;color:#bbb">${r.type}</span>` : ''}
-        <div class="rec-date">${dateStr}</div>
-      </div>
-      ${r.note ? `<div class="rec-note">${r.note}</div>` : ''}
-    </div>
-    ${showDelete ? `<div class="rec-actions"><button class="btn btn-danger" style="font-size:11px;padding:4px 10px" onclick="deleteRec('${r.id}')">✕</button></div>` : ''}
-  </div>`;
-}
-
-// ============ SAVE RECOGNITION ============
-function selectCat(btn, cat) {
-  document.querySelectorAll('#tab-recognize .cat-pick-btn').forEach(b => {
-    if (!b.id?.startsWith('rtype')) b.classList.remove('selected');
-  });
-  btn.classList.add('selected');
-  selectedCat = cat;
-  document.getElementById('recCategory').value = cat;
-}
-
-function selectRtype(type) {
-  ['verbal','whatsapp','groupchat','written'].forEach(t => {
-    document.getElementById('rtype-' + t)?.classList.remove('selected');
-  });
-  document.getElementById('rtype-' + type)?.classList.add('selected');
-  selectedRtype = type;
-  document.getElementById('recType').value = type;
-}
-
-function saveRecognition() {
-  const employee = document.getElementById('recEmployee').value;
-  const store = document.getElementById('recStore').value;
-  const date = document.getElementById('recDate').value;
-  const note = document.getElementById('recNote').value.trim();
-  const category = document.getElementById('recCategory').value;
-  const type = document.getElementById('recType').value;
-
-  if (!employee || employee === 'Select store first' || !store) {
-    document.getElementById('recError').style.display = 'block';
-    document.getElementById('recError').textContent = 'Please select a store and employee.';
-    return;
-  }
-  if (!category) {
-    document.getElementById('recError').style.display = 'block';
-    document.getElementById('recError').textContent = 'Please select a recognition category.';
-    return;
-  }
-
-  const rec = { id: 'r_' + Date.now(), employee, store, date, note, category, type, createdAt: new Date().toISOString() };
-  recognitions.unshift(rec);
-  localStorage.setItem('ph_recognitions', JSON.stringify(recognitions));
-
-  updateStreak();
-
-  // Reset form
-  document.getElementById('recNote').value = '';
-  document.getElementById('recEmployee').value = '';
-  document.getElementById('recCategory').value = '';
-  document.getElementById('recType').value = '';
-  selectedCat = ''; selectedRtype = '';
-  document.querySelectorAll('.cat-pick-btn').forEach(b => b.classList.remove('selected'));
-  document.getElementById('recError').style.display = 'none';
-
-  // Show success flash
-  const btn = document.querySelector('#tab-recognize .btn-big');
-  btn.textContent = '✅ SAVED!';
-  btn.style.background = 'var(--green)';
-  setTimeout(() => { btn.textContent = 'SAVE RECOGNITION ⭐'; btn.style.background = ''; }, 2000);
-}
-
-function deleteRec(id) {
-  if (!confirm('Delete this recognition?')) return;
-  recognitions = recognitions.filter(r => r.id !== id);
-  localStorage.setItem('ph_recognitions', JSON.stringify(recognitions));
-  renderHistory(); renderDashboard();
-}
-
-// ============ HISTORY ============
-function buildStoreTabs() {
-  const stores = ['all', ...STORES];
-  const historyTabsEl = document.getElementById('historyStoreTabs');
-  const teamTabsEl = document.getElementById('teamStoreTabs');
-  historyTabsEl.innerHTML = stores.map(s =>
-    `<div class="store-tab ${s === 'all' ? 'active' : ''}" onclick="setHistoryStore('${s}',this)">${s === 'all' ? 'All Stores' : s.split(' ')[0]}</div>`
-  ).join('');
-  teamTabsEl.innerHTML = stores.map(s =>
-    `<div class="store-tab ${s === 'all' ? 'active' : ''}" onclick="setTeamStore('${s}',this)">${s === 'all' ? 'All Stores' : s.split(' ')[0]}</div>`
-  ).join('');
-}
-
-function setHistoryStore(store, el) {
-  historyStoreFilter = store;
-  document.querySelectorAll('#historyStoreTabs .store-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  renderHistory();
-}
-
-function renderHistory() {
-  const search = document.getElementById('historySearch')?.value.toLowerCase() || '';
-  let filtered = recognitions;
-  if (historyStoreFilter !== 'all') filtered = filtered.filter(r => r.store === historyStoreFilter);
-  if (search) filtered = filtered.filter(r => r.employee?.toLowerCase().includes(search));
-  const list = document.getElementById('historyList');
-  list.innerHTML = filtered.length
-    ? filtered.map(r => recCardHTML(r, true)).join('')
-    : '<div style="text-align:center;padding:32px;color:var(--mid);font-size:13px">No recognitions found.</div>';
-}
-
-// ============ TEAM ============
-function saveEmployee() {
-  const name = document.getElementById('empName').value.trim();
-  const store = document.getElementById('empStore').value;
-  const role = document.getElementById('empRole').value;
-  if (!name || !store) { alert('Please enter name and store.'); return; }
-  if (employees.find(e => e.name === name && e.store === store)) { alert('Employee already exists.'); return; }
-  employees.push({ id: 'e_' + Date.now(), name, store, role });
-  localStorage.setItem('ph_employees', JSON.stringify(employees));
-  document.getElementById('empName').value = '';
-  renderTeam();
-}
-
-function deleteEmployee(id) {
-  if (!confirm('Remove this employee?')) return;
-  employees = employees.filter(e => e.id !== id);
-  localStorage.setItem('ph_employees', JSON.stringify(employees));
-  renderTeam();
-}
-
-function setTeamStore(store, el) {
-  teamStoreFilter = store;
-  document.querySelectorAll('#teamStoreTabs .store-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  renderTeam();
-}
-
-function renderTeam() {
-  let filtered = employees;
-  if (teamStoreFilter !== 'all') filtered = filtered.filter(e => e.store === teamStoreFilter);
-  const grid = document.getElementById('empGrid');
-  if (!filtered.length) { grid.innerHTML = '<div style="color:var(--mid);font-size:13px;padding:16px">No employees added yet. Add your team above.</div>'; return; }
-
-  grid.innerHTML = filtered.map(e => {
-    const recs = recognitions.filter(r => r.employee === e.name && r.store === e.store);
-    const last = recs.length ? new Date(recs[0].date) : null;
-    const daysSince = last ? Math.floor((new Date() - last) / (1000 * 60 * 60 * 24)) : null;
-    const overdue = daysSince === null || daysSince > 14;
-    const storeIdx = STORES.indexOf(e.store);
-    const color = STORE_COLORS[storeIdx] || '#888';
-    const initials = e.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-    return `<div class="emp-card">
-      <div class="emp-card-top">
-        <div class="emp-avatar" style="background:${color}">${initials}</div>
+    <div style="margin-bottom:14px">
+      <label>SMS Reminder</label>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px">
+        <input type="checkbox" id="remSMS" style="width:auto;accent-color:var(--red);width:16px;height:16px">
         <div>
-          <div class="emp-info-name">${e.name}</div>
-          <div class="emp-info-role">${e.role} · ${e.store?.split(' ')[0]}</div>
+          <div style="font-size:13px;font-weight:600;color:var(--black)">Send SMS reminder to my phone</div>
+          <div style="font-size:11px;color:var(--mid);margin-top:2px">When reminder fires, opens your email app pre-filled — one tap to send yourself an SMS reminder. Uses 4163566245@txt.bell.ca (Virgin Mobile).</div>
         </div>
       </div>
-      <div class="emp-stats">
-        <div class="emp-stat"><strong>${recs.length}</strong> recognitions</div>
-      </div>
-      <div class="emp-last ${overdue ? 'emp-overdue' : ''}">
-        ${daysSince === null ? '⚠️ Never recognized' : daysSince === 0 ? '✅ Recognized today' : daysSince <= 7 ? `✅ ${daysSince}d ago` : `⚠️ ${daysSince}d ago`}
-      </div>
-      <div style="display:flex;gap:6px;margin-top:8px">
-        <button class="btn btn-red" style="font-size:11px;padding:4px 10px;flex:1" onclick="quickRecognize('${e.name}')">✨ Recognize</button>
-        <button class="btn btn-danger" style="font-size:11px;padding:4px 8px" onclick="deleteEmployee('${e.id}')">✕</button>
-      </div>
-    </div>`;
+    </div>
+    <button class="big-btn big-red" onclick="enableRem()">🔔 ENABLE REMINDERS</button>
+    <button class="btn btn-ghost" style="width:100%;margin-top:8px;font-size:13px" onclick="testSMS()">📱 Send Test SMS Now</button>
+    <div id="remStatus" style="margin-top:10px;font-size:13px;color:var(--mid)"></div>
+  </div>
+  <div class="card">
+    <div class="ctitle">This Week's Progress</div>
+    <div id="weekProg"></div>
+  </div>
+  <div class="card">
+    <div class="ctitle">Why Recognition Matters</div>
+    <div style="font-size:13px;color:var(--mid);line-height:1.7">
+      Employees who feel recognized are <strong style="color:var(--black)">63% more engaged</strong> and <strong style="color:var(--black)">4x more likely to stay</strong>. Across 5 stores with 50+ team members, even one recognition per person every two weeks makes a measurable difference in turnover and morale.<br><br>
+      <strong style="color:var(--red)">Your goal:</strong> 1 recognition per employee every 14 days. This tool alerts you when someone is overdue.
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+var STORES = ['McKnight (FMI144)','Hanson Ranch (FMI146)','Montgomery (FMI150)','Sarcee (FMI159)','Crowfoot (FMI162)'];
+var SCOL = ['#EE3124','#2D9E6B','#2563EB','#9333EA','#E07B2A'];
+var CLABEL = {upsell:'Upsell Win',guest:'Guest Experience',teamwork:'Teamwork',leadership:'Leadership',attendance:'Reliability',improvement:'Improvement',above:'Above & Beyond',other:'Other'};
+var CEMOJI = {upsell:'💰',guest:'⭐',teamwork:'🤝',leadership:'🎯',attendance:'✅',improvement:'📈',above:'🚀',other:'💬'};
+
+var emps = JSON.parse(localStorage.getItem('ph_emps')||'[]');
+var recs = JSON.parse(localStorage.getItem('ph_recs')||'[]');
+var selCat='', selType='', selGCat='';
+var histFilter='all', teamFilter='all';
+
+// ---- INIT ----
+function init(){
+  document.getElementById('rDate').value = new Date().toISOString().split('T')[0];
+  var k=localStorage.getItem('ph_api_key');
+  if(k){document.getElementById('apiInp').value=k; document.getElementById('apiBtnEl').textContent='✓ API'; document.getElementById('apiBtnEl').classList.add('set');}
+  buildStoreTabs();
+  renderDash();
+  renderHist();
+  renderTeam();
+  renderTpls();
+  renderIdeas();
+  renderRewards();
+  renderWeekProg();
+  restoreRem();
+}
+
+// ---- TABS ----
+function go(name){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('p-'+name).classList.add('active');
+  var map={dashboard:0,recognize:1,history:2,team:3,generate:4,ideas:5,rewards:6,reminders:7};
+  var tabs=document.querySelectorAll('.tab');
+  if(map[name]!==undefined) tabs[map[name]].classList.add('active');
+  if(name==='dashboard') renderDash();
+  if(name==='history') renderHist();
+  if(name==='team') renderTeam();
+  if(name==='reminders') renderWeekProg();
+}
+
+// ---- MODAL ----
+function openModal(){document.getElementById('modalBg').classList.add('open');}
+function closeModal(){document.getElementById('modalBg').classList.remove('open');}
+function bgClick(e){if(e.target===document.getElementById('modalBg')) closeModal();}
+function saveApi(){
+  var k=document.getElementById('apiInp').value.trim();
+  if(k){localStorage.setItem('ph_api_key',k); document.getElementById('apiBtnEl').textContent='✓ API'; document.getElementById('apiBtnEl').classList.add('set');}
+  closeModal();
+}
+
+// ---- DASHBOARD ----
+function renderDash(){
+  var total=recs.length;
+  var week=recs.filter(function(r){return (new Date()-new Date(r.date))/(86400000)<=7;}).length;
+  var uniqs=new Set(recs.map(function(r){return r.employee+r.store;})).size;
+  var od=getOverdue();
+  document.getElementById('dkpis').innerHTML=
+    '<div class="dkpi"><div class="dkv gold">'+total+'</div><div class="dkl">Total Given</div></div>'+
+    '<div class="dkpi"><div class="dkv grn">'+week+'</div><div class="dkl">This Week</div></div>'+
+    '<div class="dkpi"><div class="dkv">'+uniqs+'</div><div class="dkl">Employees Recognized</div></div>'+
+    '<div class="dkpi"><div class="dkv rd">'+od.length+'</div><div class="dkl">Overdue 14d+</div></div>';
+  if(od.length){
+    document.getElementById('overdueEl').style.display='block';
+    document.getElementById('opills').innerHTML=od.map(function(e){
+      return '<span class="opill" onclick="quickRec(\''+e.name+'\')">'+e.name+' — '+e.store.split(' ')[0]+'</span>';
+    }).join('');
+  } else { document.getElementById('overdueEl').style.display='none'; }
+  var recent=recs.slice(0,5);
+  document.getElementById('dashRecent').innerHTML=recent.length ? recent.map(function(r){return rcHTML(r,false);}).join('') :
+    '<div style="text-align:center;padding:22px;color:var(--mid);font-size:13px">No recognitions yet. Add your first one!</div>';
+  document.getElementById('storeBar').innerHTML=STORES.map(function(s,i){
+    var cnt=recs.filter(function(r){return r.store===s;}).length;
+    var maxCnt=Math.max.apply(null,STORES.map(function(st){return recs.filter(function(r){return r.store===st;}).length;})) || 1;
+    var pct=Math.round(cnt/maxCnt*100);
+    return '<div style="display:flex;align-items:center;gap:11px;margin-bottom:9px">'+
+      '<div style="font-size:12px;font-weight:600;width:130px;color:var(--mid)">'+s.split(' ')[0]+'</div>'+
+      '<div style="flex:1;height:7px;background:#f0e8e0;border-radius:99px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+SCOL[i]+';border-radius:99px;"></div></div>'+
+      '<div style="font-family:\'Bebas Neue\';font-size:17px;color:'+SCOL[i]+';min-width:24px;text-align:right">'+cnt+'</div></div>';
   }).join('');
 }
 
-function populateEmployees() {
-  const store = document.getElementById('recStore').value;
-  const sel = document.getElementById('recEmployee');
-  const storeEmps = employees.filter(e => e.store === store);
-  if (!store) { sel.innerHTML = '<option>Select store first</option>'; return; }
-  if (!storeEmps.length) {
-    sel.innerHTML = '<option>No employees — add in Team tab</option>';
-    return;
-  }
-  sel.innerHTML = '<option value="">Select employee</option>' + storeEmps.map(e => `<option>${e.name}</option>`).join('');
-}
-
-// ============ GENERATE MESSAGE ============
-function selectGenCat(btn, cat) {
-  document.querySelectorAll('#genCatPicker .cat-pick-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedGenCat = cat;
-  document.getElementById('genCategory').value = cat;
-}
-
-async function generateMessage() {
-  const apiKey = localStorage.getItem('ph_api_key');
-  if (!apiKey) { document.getElementById('genError').style.display = 'block'; document.getElementById('genError').textContent = 'Please set your API key via the ⚙️ button.'; return; }
-
-  const name = document.getElementById('genName').value.trim();
-  const style = document.getElementById('genStyle').value;
-  const category = document.getElementById('genCategory').value;
-  const detail = document.getElementById('genDetail').value.trim();
-  const tone = document.getElementById('genTone').value;
-  const emoji = document.getElementById('genEmoji').value;
-
-  if (!name) { document.getElementById('genError').style.display = 'block'; document.getElementById('genError').textContent = 'Please enter the employee name.'; return; }
-  if (!detail) { document.getElementById('genError').style.display = 'block'; document.getElementById('genError').textContent = 'Please describe what they did.'; return; }
-
-  document.getElementById('genError').style.display = 'none';
-  const btn = document.getElementById('genBtn');
-  btn.innerHTML = '<span class="spinner"></span> GENERATING...';
-  btn.disabled = true;
-  document.getElementById('genOutputWrap').style.display = 'none';
-
-  const styleDesc = { whatsapp:'casual WhatsApp message, conversational, personal', groupchat:'group chat shoutout, energetic, public praise', verbal:'verbal script for face-to-face recognition, warm and direct', written:'written note or card, heartfelt', email:'professional email to the RGM praising the employee' };
-  const catDesc = CAT_LABELS[category] || 'general performance';
-
-  const prompt = `You are an Area Coach at Pizza Hut in Calgary writing a recognition message.
-
-Employee name: ${name}
-Recognition category: ${catDesc}
-What they did: ${detail}
-Message style: ${styleDesc[style] || style}
-Tone: ${tone}
-Use emoji: ${emoji === 'yes' ? 'yes, naturally placed' : 'no emoji'}
-
-Write a single recognition message. Make it specific, genuine, and personal — reference what they actually did. Do not be generic. No preamble, just the message itself.`;
-
-  try {
-    const resp = await fetch('https://pizza-proxy.vaghela-mihir91.workers.dev/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 400, messages: [{ role: 'user', content: prompt }] })
-    });
-    const data = await resp.json();
-    if (data.error) throw new Error(data.error.message);
-    const msg = data.content.map(b => b.text || '').join('').trim();
-    document.getElementById('genOutput').textContent = msg;
-    document.getElementById('genOutputWrap').style.display = 'block';
-  } catch (err) {
-    document.getElementById('genError').style.display = 'block';
-    document.getElementById('genError').textContent = 'Generation failed: ' + err.message;
-  }
-
-  btn.innerHTML = '✨ GENERATE RECOGNITION MESSAGE';
-  btn.disabled = false;
-}
-
-function copyMessage() {
-  const text = document.getElementById('genOutput').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = event.target;
-    btn.textContent = '✅ Copied!';
-    setTimeout(() => btn.textContent = '📋 Copy Message', 2000);
+function getOverdue(){
+  var now=new Date();
+  return emps.filter(function(e){
+    var er=recs.filter(function(r){return r.employee===e.name&&r.store===e.store;});
+    if(!er.length) return true;
+    return (now-new Date(er[0].date))/86400000>14;
   });
 }
 
-function saveFromGenerator() {
-  const name = document.getElementById('genName').value.trim();
-  const cat = document.getElementById('genCategory').value;
-  const note = document.getElementById('genOutput').textContent;
-  if (!name) { alert('Please enter employee name first.'); return; }
-  const rec = { id: 'r_' + Date.now(), employee: name, store: '', date: new Date().toISOString().split('T')[0], note, category: cat, type: document.getElementById('genStyle').value, createdAt: new Date().toISOString() };
-  recognitions.unshift(rec);
-  localStorage.setItem('ph_recognitions', JSON.stringify(recognitions));
-  alert('Saved to recognition history!');
+function quickRec(name){document.getElementById('gName').value=name; go('generate');}
+
+// ---- REC CARD HTML ----
+function rcHTML(r, showDel){
+  var catCls='c-'+(r.category||'other');
+  var emoji=CEMOJI[r.category]||'💬';
+  var label=CLABEL[r.category]||'Other';
+  var dt=new Date(r.date).toLocaleDateString('en-CA',{month:'short',day:'numeric'});
+  return '<div class="rcard">'+
+    '<div class="remoji">'+emoji+'</div>'+
+    '<div class="rbody">'+
+      '<div class="rtop">'+
+        '<div class="rname">'+r.employee+'</div>'+
+        (r.store?'<div class="rstore">'+r.store.split(' ')[0]+'</div>':'')+
+        '<span class="rcat '+catCls+'">'+label+'</span>'+
+        (r.type?'<span style="font-size:10px;color:#ccc">'+r.type+'</span>':'')+
+        '<div class="rdate">'+dt+'</div>'+
+      '</div>'+
+      (r.note?'<div class="rnote">'+r.note+'</div>':'')+
+    '</div>'+
+    (showDel?'<button class="btn btn-del" onclick="delRec(\''+r.id+'\')">✕</button>':'')+
+  '</div>';
 }
 
-// ============ TEMPLATES ============
-function renderTemplates() {
-  const list = document.getElementById('templateList');
-  list.innerHTML = TEMPLATES.map((t, i) => {
-    const emoji = CAT_EMOJI[t.cat] || '💬';
-    const label = CAT_LABELS[t.cat] || 'Other';
-    return `<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--mid)">${emoji} ${label}</span>
-        <button class="btn btn-ghost" style="font-size:11px;padding:3px 10px" onclick="useTemplate(${i})">Use This</button>
-      </div>
-      <div style="font-size:13px;color:var(--mid);line-height:1.5">${t.text('[Name]')}</div>
-    </div>`;
+// ---- SAVE REC ----
+function pickCat(btn,cat){
+  document.querySelectorAll('#p-recognize .cats .cpill').forEach(function(b){if(!b.id||!b.id.startsWith('rt-')) b.classList.remove('on');});
+  btn.classList.add('on'); selCat=cat; document.getElementById('rCat').value=cat;
+}
+function pickType(btn,type){
+  ['rt-verbal','rt-whatsapp','rt-group','rt-written'].forEach(function(id){var el=document.getElementById(id);if(el) el.classList.remove('on');});
+  btn.classList.add('on'); selType=type; document.getElementById('rType').value=type;
+}
+function fillEmps(){
+  var st=document.getElementById('rStore').value;
+  var sel=document.getElementById('rEmp');
+  var list=emps.filter(function(e){return e.store===st;});
+  if(!st){sel.innerHTML='<option>Select store first</option>';return;}
+  if(!list.length){sel.innerHTML='<option>No employees — add in Team tab</option>';return;}
+  sel.innerHTML='<option value="">Select employee</option>'+list.map(function(e){return '<option>'+e.name+'</option>';}).join('');
+}
+function saveRec(){
+  var emp=document.getElementById('rEmp').value;
+  var st=document.getElementById('rStore').value;
+  var dt=document.getElementById('rDate').value;
+  var note=document.getElementById('rNote').value.trim();
+  var cat=document.getElementById('rCat').value;
+  var type=document.getElementById('rType').value;
+  var err=document.getElementById('recErr');
+  if(!emp||!st){err.style.display='block';err.textContent='Please select store and employee.';return;}
+  if(!cat){err.style.display='block';err.textContent='Please select a category.';return;}
+  err.style.display='none';
+  var rec={id:'r_'+Date.now(),employee:emp,store:st,date:dt,note:note,category:cat,type:type};
+  recs.unshift(rec); localStorage.setItem('ph_recs',JSON.stringify(recs));
+  document.getElementById('rNote').value=''; document.getElementById('rCat').value=''; document.getElementById('rType').value='';
+  selCat=''; selType='';
+  document.querySelectorAll('#p-recognize .cpill').forEach(function(b){b.classList.remove('on');});
+  var btn=document.querySelector('#p-recognize .big-btn');
+  btn.textContent='✅ SAVED!'; btn.style.background='var(--green)';
+  setTimeout(function(){btn.textContent='SAVE RECOGNITION ⭐'; btn.style.background='';},2000);
+}
+function delRec(id){
+  if(!confirm('Delete this recognition?'))return;
+  recs=recs.filter(function(r){return r.id!==id;});
+  localStorage.setItem('ph_recs',JSON.stringify(recs));
+  renderHist(); renderDash();
+}
+
+// ---- HISTORY ----
+function buildStoreTabs(){
+  var all=['all'].concat(STORES);
+  var histEl=document.getElementById('histTabs');
+  var teamEl=document.getElementById('teamTabs');
+  histEl.innerHTML=all.map(function(s){
+    return '<div class="stab'+(s==='all'?' active':'')+'" onclick="setHist(\''+s+'\',this)">'+( s==='all'?'All':s.split(' ')[0])+'</div>';
+  }).join('');
+  teamEl.innerHTML=all.map(function(s){
+    return '<div class="stab'+(s==='all'?' active':'')+'" onclick="setTeam(\''+s+'\',this)">'+( s==='all'?'All':s.split(' ')[0])+'</div>';
+  }).join('');
+}
+function setHist(s,el){histFilter=s; document.querySelectorAll('#histTabs .stab').forEach(function(t){t.classList.remove('active');}); el.classList.add('active'); renderHist();}
+function renderHist(){
+  var q=(document.getElementById('histSearch')||{}).value||''; q=q.toLowerCase();
+  var f=recs;
+  if(histFilter!=='all') f=f.filter(function(r){return r.store===histFilter;});
+  if(q) f=f.filter(function(r){return r.employee&&r.employee.toLowerCase().indexOf(q)>=0;});
+  var el=document.getElementById('histList');
+  el.innerHTML=f.length ? f.map(function(r){return rcHTML(r,true);}).join('') :
+    '<div style="text-align:center;padding:28px;color:var(--mid);font-size:13px">No recognitions found.</div>';
+}
+
+// ---- TEAM ----
+function addEmp(){
+  var name=document.getElementById('eName').value.trim();
+  var st=document.getElementById('eStore').value;
+  var role=document.getElementById('eRole').value;
+  if(!name||!st){alert('Please enter name and store.');return;}
+  if(emps.find(function(e){return e.name===name&&e.store===st;})){alert('Already exists.');return;}
+  emps.push({id:'e_'+Date.now(),name:name,store:st,role:role});
+  localStorage.setItem('ph_emps',JSON.stringify(emps));
+  document.getElementById('eName').value=''; renderTeam();
+}
+function delEmp(id){
+  if(!confirm('Remove employee?'))return;
+  emps=emps.filter(function(e){return e.id!==id;});
+  localStorage.setItem('ph_emps',JSON.stringify(emps)); renderTeam();
+}
+function setTeam(s,el){teamFilter=s; document.querySelectorAll('#teamTabs .stab').forEach(function(t){t.classList.remove('active');}); el.classList.add('active'); renderTeam();}
+function renderTeam(){
+  var f=emps; if(teamFilter!=='all') f=f.filter(function(e){return e.store===teamFilter;});
+  var el=document.getElementById('empGrid');
+  if(!f.length){el.innerHTML='<div style="color:var(--mid);font-size:13px;padding:14px">No employees added yet.</div>';return;}
+  var now=new Date();
+  el.innerHTML=f.map(function(e){
+    var er=recs.filter(function(r){return r.employee===e.name&&r.store===e.store;});
+    var days=er.length ? Math.floor((now-new Date(er[0].date))/86400000) : null;
+    var od=days===null||days>14;
+    var ci=STORES.indexOf(e.store); var col=SCOL[ci]||'#888';
+    var ini=(e.name||'').split(' ').map(function(n){return n[0]||'';}).join('').toUpperCase().slice(0,2);
+    var lastStr=days===null?'Never recognized':days===0?'Today':days+'d ago';
+    return '<div class="ecard">'+
+      '<div class="etop"><div class="eavatar" style="background:'+col+'">'+ini+'</div>'+
+      '<div><div class="ename">'+e.name+'</div><div class="erole">'+e.role+' · '+e.store.split(' ')[0]+'</div></div></div>'+
+      '<div style="font-size:11px;color:var(--mid)">'+er.length+' recognition'+(er.length!==1?'s':'')+'</div>'+
+      '<div class="elast'+(od?' od':'')+'">'+( od?'⚠️ ':'✅ ')+lastStr+'</div>'+
+      '<div style="display:flex;gap:6px;margin-top:8px">'+
+      '<button class="btn btn-red" style="font-size:11px;padding:4px 10px;flex:1" onclick="quickRec(\''+e.name+'\')">✨ Recognize</button>'+
+      '<button class="btn btn-del" onclick="delEmp(\''+e.id+'\')">✕</button></div></div>';
   }).join('');
 }
 
-function useTemplate(i) {
-  const name = prompt('Enter employee name:');
-  if (!name) return;
-  const msg = TEMPLATES[i].text(name);
-  navigator.clipboard.writeText(msg).then(() => alert('Message copied to clipboard!\n\n' + msg)).catch(() => alert(msg));
+// ---- GENERATE MESSAGE ----
+function pickGCat(btn,cat){
+  document.querySelectorAll('#p-generate .cats .cpill').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on'); selGCat=cat; document.getElementById('gCat').value=cat;
+}
+async function genMsg(){
+  var k=localStorage.getItem('ph_api_key');
+  var err=document.getElementById('genErr');
+  if(!k){err.style.display='block';err.textContent='Please set your API key via the ⚙️ API button.';return;}
+  var name=document.getElementById('gName').value.trim();
+  var detail=document.getElementById('gDetail').value.trim();
+  if(!name){err.style.display='block';err.textContent='Please enter employee name.';return;}
+  if(!detail){err.style.display='block';err.textContent='Please describe what they did.';return;}
+  err.style.display='none';
+  var btn=document.getElementById('genBtn');
+  btn.innerHTML='<span class="spin"></span> GENERATING...'; btn.disabled=true;
+  document.getElementById('genOut').style.display='none';
+  var style=document.getElementById('gStyle').value;
+  var cat=document.getElementById('gCat').value;
+  var tone=document.getElementById('gTone').value;
+  var emoji=document.getElementById('gEmoji').value;
+  var styleMap={whatsapp:'casual WhatsApp message, conversational and personal',groupchat:'group chat shoutout, energetic, public praise',verbal:'verbal script for face-to-face recognition, warm and direct',written:'written note, heartfelt',email:'professional email to the RGM praising the employee'};
+  var prompt='You are a Pizza Hut Area Coach in Calgary writing a recognition message.\n\nEmployee: '+name+'\nCategory: '+(CLABEL[cat]||'General')+'\nWhat they did: '+detail+'\nStyle: '+(styleMap[style]||style)+'\nTone: '+tone+'\nEmoji: '+(emoji==='yes'?'yes, naturally placed':'no emoji')+'\n\nWrite one recognition message. Be specific and genuine, reference exactly what they did. No preamble, just the message.';
+  try{
+    var resp=await fetch('https://pizza-proxy.vaghela-mihir91.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':k},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})});
+    var data=await resp.json();
+    if(data.error) throw new Error(data.error.message);
+    var msg=data.content.map(function(b){return b.text||'';}).join('').trim();
+    document.getElementById('moutEl').textContent=msg;
+    document.getElementById('genOut').style.display='block';
+  }catch(e){err.style.display='block';err.textContent='Failed: '+e.message;}
+  btn.innerHTML='✨ GENERATE RECOGNITION MESSAGE'; btn.disabled=false;
+}
+function copyMsg(){
+  var txt=document.getElementById('moutEl').textContent;
+  navigator.clipboard.writeText(txt).then(function(){
+    var b=event.target; b.textContent='✅ Copied!';
+    setTimeout(function(){b.textContent='📋 Copy';},2000);
+  });
+}
+function saveFromGen(){
+  var name=document.getElementById('gName').value.trim();
+  if(!name){alert('Enter employee name first.');return;}
+  var rec={id:'r_'+Date.now(),employee:name,store:'',date:new Date().toISOString().split('T')[0],note:document.getElementById('moutEl').textContent,category:document.getElementById('gCat').value,type:document.getElementById('gStyle').value};
+  recs.unshift(rec); localStorage.setItem('ph_recs',JSON.stringify(recs));
+  alert('Saved to history!');
 }
 
-
-// ============ NEW TAB ROUTING ============
-const origSwitchTab = switchTab;
-function switchTab(name) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  const panel = document.getElementById('tab-' + name);
-  if (panel) panel.classList.add('active');
-  const map = { dashboard:0, recognize:1, history:2, team:3, generate:4, ideas:5, rewards:6, reminders:7 };
-  if (map[name] !== undefined) document.querySelectorAll('.tab')[map[name]]?.classList.add('active');
-  if (name === 'dashboard') renderDashboard();
-  if (name === 'history') renderHistory();
-  if (name === 'team') renderTeam();
-  if (name === 'ideas') renderIdeas();
-  if (name === 'rewards') renderRewards();
-  if (name === 'reminders') renderReminderStatus();
-}
-
-// ============ IDEAS CHECKLIST ============
-const IDEA_TRIGGERS = [
-  { cat:'upsell', icon:'💰', title:'Upsell Wins', items:['Did anyone upsell drinks on most orders?','Did someone mention a promo without being asked?','Did an employee turn a single item into a full combo?','Did someone upsell on a complaint call?'] },
-  { cat:'guest', icon:'⭐', title:'Guest Experience', items:['Did a customer give a compliment — in person, on Google, or on SMG?','Did someone handle a complaint really well?','Did anyone go out of their way to make a customer feel welcome?','Did someone remember a regular customer's order?'] },
-  { cat:'teamwork', icon:'🤝', title:'Teamwork Moments', items:['Did someone help a coworker without being asked?','Did anyone cover a shift last minute?','Did someone train or mentor a new hire?','Did anyone step up when the team was short-staffed?'] },
-  { cat:'leadership', icon:'🎯', title:'Leadership Behaviour', items:['Did an RGM handle a tough situation calmly?','Did a shift leader run a clean shift under pressure?','Did anyone make a good decision on their own without calling you?','Did someone motivate the rest of the team?'] },
-  { cat:'attendance', icon:'✅', title:'Reliability', items:['Is there someone who hasn't missed a shift in months?','Did anyone show up on time every day this week?','Did someone stay late without complaining?','Did anyone come in on their day off when needed?'] },
-  { cat:'improvement', icon:'📈', title:'Growth & Improvement', items:['Has a new hire improved significantly since starting?','Did someone master a new skill or station?','Did you notice better order accuracy from someone?','Has someone's speed improved noticeably?'] },
-  { cat:'above', icon:'🚀', title:'Above & Beyond', items:['Did someone do something that surprised you?','Did anyone fix a problem before you even knew about it?','Did someone take initiative on something not in their job description?','Did an employee represent Pizza Hut well outside of work?'] },
+// ---- TEMPLATES ----
+var TPLS=[
+  {cat:'upsell',txt:function(n){return 'Hey '+n+'! Just wanted to say your upselling today was great. Customers love when you offer them options. Keep it up!';}},
+  {cat:'guest',txt:function(n){return n+' — got great feedback about you today. A customer noticed how friendly and helpful you were. That is exactly what Pizza Hut is all about. Thank you!';}},
+  {cat:'teamwork',txt:function(n){return 'Shoutout to '+n+' for stepping up and helping the team today without being asked. That attitude makes everything run smoother. We see it!';}},
+  {cat:'above',txt:function(n){return n+' went above and beyond today and it did not go unnoticed. That extra effort makes a real difference. Proud to have you on the team!';}},
+  {cat:'improvement',txt:function(n){return n+' — the improvement is real. You should be proud of how far you have come. Keep pushing!';}},
+  {cat:'attendance',txt:function(n){return 'Shoutout to '+n+' for always showing up, always on time, always ready. That reliability is something the whole team counts on. Thank you!';}},
+  {cat:'leadership',txt:function(n){return n+' showed real leadership today — kept the team together, stayed calm under pressure, and led by example. That is the kind of attitude that builds great restaurants.';}},
 ];
-
-function renderIdeas() {
-  const el = document.getElementById('ideasChecklist');
-  el.innerHTML = IDEA_TRIGGERS.map(group => `
-    <div style="margin-bottom:18px">
-      <div style="font-family:'Bebas Neue';font-size:14px;letter-spacing:1px;color:var(--black);margin-bottom:8px">${group.icon} ${group.title}</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        ${group.items.map(item => `
-          <label style="display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:var(--bg);border-radius:7px;cursor:pointer;font-size:13px;color:var(--mid);font-weight:400;letter-spacing:0;text-transform:none">
-            <input type="checkbox" style="width:auto;margin-top:2px;accent-color:var(--red)" onchange="checkIdea(this,'${group.cat}')">
-            <span>${item}</span>
-          </label>`).join('')}
-      </div>
-    </div>`).join('');
+function renderTpls(){
+  var el=document.getElementById('tplList');
+  el.innerHTML=TPLS.map(function(t,i){
+    var emoji=CEMOJI[t.cat]||'💬'; var label=CLABEL[t.cat]||'Other';
+    return '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px 13px;margin-bottom:8px">'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">'+
+      '<span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--mid)">'+emoji+' '+label+'</span>'+
+      '<button class="btn btn-ghost" style="font-size:11px;padding:3px 9px" onclick="useTpl('+i+')">Use This</button></div>'+
+      '<div style="font-size:12.5px;color:var(--mid);line-height:1.5">'+t.txt('[Name]')+'</div></div>';
+  }).join('');
+}
+function useTpl(i){
+  var name=prompt('Enter employee name:'); if(!name) return;
+  var msg=TPLS[i].txt(name);
+  navigator.clipboard.writeText(msg).then(function(){alert('Copied!\n\n'+msg);}).catch(function(){alert(msg);});
 }
 
-function checkIdea(checkbox, cat) {
-  if (checkbox.checked) {
-    const label = checkbox.nextElementSibling.textContent;
-    setTimeout(() => {
-      if (confirm(`Spotted something to recognize in "${label}"?\n\nGo to the Recognize tab to log it?`)) {
-        document.getElementById('recCategory').value = cat;
-        switchTab('recognize');
+// ---- IDEAS ----
+var IDEA_GROUPS=[
+  {icon:'💰',title:'Upsell Wins',cat:'upsell',items:['Did anyone upsell drinks on most orders?','Did someone mention a current promo without being asked?','Did an employee turn a single item into a full combo?','Did someone upsell during a complaint recovery?']},
+  {icon:'⭐',title:'Guest Experience',cat:'guest',items:['Did a customer give a compliment in person or on Google?','Did someone handle a complaint really well?','Did anyone go out of their way to make a customer feel welcome?','Did someone remember a regular customer?']},
+  {icon:'🤝',title:'Teamwork',cat:'teamwork',items:['Did someone help a coworker without being asked?','Did anyone cover a shift last minute?','Did someone train or mentor a new hire?','Did anyone step up when the team was short-staffed?']},
+  {icon:'🎯',title:'Leadership',cat:'leadership',items:['Did an RGM handle a tough situation calmly?','Did a shift leader run a clean shift under pressure?','Did anyone make a good decision without calling you?','Did someone motivate the rest of the team?']},
+  {icon:'✅',title:'Reliability',cat:'attendance',items:['Has someone not missed a shift in months?','Did anyone show up on time every day this week?','Did someone stay late without complaining?','Did anyone come in on their day off?']},
+  {icon:'📈',title:'Growth',cat:'improvement',items:['Has a new hire improved significantly?','Did someone master a new skill or station?','Did you notice better accuracy from someone?','Has someone\'s speed improved noticeably?']},
+  {icon:'🚀',title:'Above and Beyond',cat:'above',items:['Did someone do something that surprised you?','Did anyone fix a problem before you knew about it?','Did someone take initiative outside their job description?','Did an employee represent Pizza Hut well outside work?']},
+];
+function renderIdeas(){
+  var el=document.getElementById('ideaCheck');
+  el.innerHTML=IDEA_GROUPS.map(function(g){
+    return '<div class="igroup">'+
+      '<div class="igtitle">'+g.icon+' '+g.title+'</div>'+
+      g.items.map(function(item){
+        return '<label class="iitem"><input type="checkbox" onchange="checkIdea(this,\''+g.cat+'\')" style="width:auto;margin-top:2px;accent-color:var(--red);flex-shrink:0"><span>'+item+'</span></label>';
+      }).join('')+'</div>';
+  }).join('');
+}
+function checkIdea(cb, cat){
+  if(cb.checked){
+    var lbl=cb.nextElementSibling.textContent;
+    setTimeout(function(){
+      if(confirm('Spotted: "'+lbl+'"\n\nGo to Recognize tab to log it?')){
+        document.getElementById('rCat').value=cat; go('recognize');
       }
-    }, 100);
+    },100);
   }
 }
-
-// ============ GENERATE IDEAS ============
-async function generateIdeas() {
-  const apiKey = localStorage.getItem('ph_api_key');
-  if (!apiKey) { document.getElementById('ideaError').style.display='block'; document.getElementById('ideaError').textContent='Please set your API key via the ⚙️ button.'; return; }
-  const store = document.getElementById('ideaStore').value;
-  const context = document.getElementById('ideaContext').value.trim();
-  const detail = document.getElementById('ideaDetail').value.trim();
-  if (!detail) { document.getElementById('ideaError').style.display='block'; document.getElementById('ideaError').textContent='Please describe what happened this week.'; return; }
-  document.getElementById('ideaError').style.display='none';
-  const btn = document.getElementById('ideaBtn');
-  btn.innerHTML='<span class="spinner"></span> THINKING...'; btn.disabled=true;
-  document.getElementById('ideaOutputWrap').style.display='none';
-
-  const prompt = `You are helping a Pizza Hut Area Coach in Calgary find recognition opportunities for his team.
-
-Store: ${store || 'one of his stores'}
-Context: ${context || 'regular week'}
-What happened this week: ${detail}
-
-Based on this, give him 4-6 SPECIFIC recognition ideas. For each one:
-- Name the type of behaviour to recognize (be specific, not generic)
-- Suggest WHO might deserve it based on the context (role/situation, not just "someone")
-- Give a one-line reason WHY this matters for the team
-
-Format each idea clearly with a number. Be practical and actionable. Focus on things an Area Coach can recognize immediately this week.`;
-
-  try {
-    const resp = await fetch('https://pizza-proxy.vaghela-mihir91.workers.dev/', {
-      method:'POST', headers:{'Content-Type':'application/json','x-api-key':apiKey},
-      body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:prompt}]})
-    });
-    const data = await resp.json();
-    if (data.error) throw new Error(data.error.message);
-    const msg = data.content.map(b => b.text||'').join('').trim();
-    document.getElementById('ideaOutput').textContent = msg;
-    document.getElementById('ideaOutputWrap').style.display='block';
-  } catch(err) {
-    document.getElementById('ideaError').style.display='block';
-    document.getElementById('ideaError').textContent='Failed: ' + err.message;
-  }
+async function genIdeas(){
+  var k=localStorage.getItem('ph_api_key');
+  var err=document.getElementById('ideaErr');
+  if(!k){err.style.display='block';err.textContent='Please set your API key via the ⚙️ API button.';return;}
+  var detail=document.getElementById('iDetail').value.trim();
+  if(!detail){err.style.display='block';err.textContent='Please describe what happened this week.';return;}
+  err.style.display='none';
+  var btn=document.getElementById('ideaBtn');
+  btn.innerHTML='<span class="spin"></span> THINKING...'; btn.disabled=true;
+  document.getElementById('ideaOut').style.display='none';
+  var store=document.getElementById('iStore').value;
+  var ctx=document.getElementById('iCtx').value.trim();
+  var prompt='You are helping a Pizza Hut Area Coach in Calgary find recognition opportunities.\n\nStore: '+(store||'one of his stores')+'\nContext: '+(ctx||'regular week')+'\nThis week: '+detail+'\n\nGive 5 specific recognition ideas. For each: name the behaviour, suggest who (role/situation), and why it matters. Be practical and actionable.';
+  try{
+    var resp=await fetch('https://pizza-proxy.vaghela-mihir91.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':k},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:prompt}]})});
+    var data=await resp.json();
+    if(data.error) throw new Error(data.error.message);
+    var msg=data.content.map(function(b){return b.text||'';}).join('').trim();
+    document.getElementById('ideaMout').textContent=msg;
+    document.getElementById('ideaOut').style.display='block';
+  }catch(e){err.style.display='block';err.textContent='Failed: '+e.message;}
   btn.innerHTML='💡 GIVE ME RECOGNITION IDEAS'; btn.disabled=false;
 }
 
-// ============ REWARDS ============
-const FREE_REWARDS = [
-  { icon:'📢', title:'Public Shoutout in Group Chat', desc:'Post a specific praise message in the store WhatsApp group. Name them, say exactly what they did, and why it matters. Takes 2 minutes, lasts in the chat forever.' },
-  { icon:'🗣️', title:'Face-to-Face Verbal Praise', desc:'Pull them aside privately or in front of the team and say what you noticed. Be specific. "I saw what you did with that complaint customer — that was impressive." Costs nothing, means everything.' },
-  { icon:'📝', title:'Handwritten Thank You Note', desc:'Leave a handwritten note in their locker or with their pay. Employees keep these for years. A $0 sticky note with genuine words beats a $10 gift card every time.' },
-  { icon:'📱', title:'Direct WhatsApp Message', desc:'Send a personal message directly to them — not in the group. Private recognition feels more genuine. Copy-paste from the generator in this tool.' },
-  { icon:'📸', title:'Team Board Recognition', desc:'Put their name and achievement on a physical board at the store. "Employee of the Week" or just "Shoutout to Sarah for ___". Free, visible, lasting.' },
-  { icon:'⭐', title:'Tell Their RGM in Writing', desc:'Email or message the RGM specifically praising the employee — and CC the employee. They feel seen at multiple levels. Costs nothing, builds loyalty.' },
-  { icon:'📊', title:'Feature in Your Region Updates', desc:'Include a "Team Win" section in your weekly AC update to your DM or peers. Employees hear about it and feel proud.' },
-  { icon:'🎯', title:'Give Them a Responsibility', desc:'Assign them a small ownership role — "You're leading the Google review push this month." Recognition through trust and responsibility is powerful.' },
+// ---- REWARDS ----
+var FREE_R=[
+  {i:'📢',t:'Public Shoutout in Group Chat',d:'Post specific praise in the store WhatsApp group. Name them, say what they did, and why it matters. Takes 2 minutes, lasts in the chat forever.'},
+  {i:'🗣️',t:'Face-to-Face Verbal Praise',d:'Pull them aside or praise in front of the team. Be specific — "I saw what you did with that customer, that was impressive." Costs nothing, means everything.'},
+  {i:'📝',t:'Handwritten Thank You Note',d:'Leave a note in their locker or with their pay. Employees keep these for years. A genuine handwritten message beats a gift card every time.'},
+  {i:'📱',t:'Direct WhatsApp Message',d:'Message them personally — not in the group. Private recognition feels more genuine and shows you thought of them specifically.'},
+  {i:'📸',t:'Team Board or Wall of Fame',d:'Put their name and achievement on a physical board at the store. Visible, lasting, and free.'},
+  {i:'⭐',t:'Tell Their RGM in Writing',d:'Email the RGM praising the employee and CC them. They feel seen at multiple levels. Zero cost, builds loyalty.'},
+  {i:'🎯',t:'Give Them a Responsibility',d:'Assign them ownership of something — leading the Google review push, training a new hire, managing a prep area. Recognition through trust is powerful.'},
+  {i:'📊',t:'Feature in Region Updates',d:'Include a Team Win in your weekly AC update. Employees hear about it through their RGM and feel proud.'},
 ];
-
-const BUDGET_REWARDS = [
-  { icon:'☕', title:'Tim Hortons / Starbucks Gift Card — $10', desc:'Grab a $10 Tims card during your store visit. Hand it personally with a specific reason. Simple, personal, immediate. Costs $10, feels like $50.' },
-  { icon:'🍕', title:'Free Meal on Shift — $0–$8', desc:'Tell the RGM to give them a free meal during their next shift on your behalf. Easy to arrange, feels like a perk. Works within food cost.' },
-  { icon:'🧢', title:'Pizza Hut Branded Merch — $5–$15', desc:'Branded hat, hoodie, or t-shirt. Order in bulk from Pizza Hut corporate swag — costs less per unit. Employees actually wear these.' },
-  { icon:'🎬', title:'Movie Ticket — $15–$18', desc:'Cineplex general admission. Grab a pair for a top performer. Easy to buy online, meaningful to receive.' },
-  { icon:'📦', title:'Amazon Gift Card — $15–$20', desc:'Instantly sent via email. Flexible, everyone wants it. Use for top monthly performer.' },
-  { icon:'🧁', title:'Bring Treats for Their Shift — $10–$20', desc:'Show up with donuts, cupcakes, or a Costco cake for the whole shift — and publicly say it's because of that specific person. The whole team celebrates together.' },
-  { icon:'⛽', title:'Gas Card — $20', desc:'For drivers especially — a $20 gas card is incredibly practical and appreciated. Petro-Canada or Esso, available at any convenience store.' },
-  { icon:'📅', title:'Preferred Scheduling for a Month — $0', desc:'Let them pick one shift per week for a month. Zero cost, huge perceived value. Works especially well for students or parents.' },
+var BUDG_R=[
+  {i:'☕',t:'Tim Hortons Gift Card — $10',d:'Grab a $10 Tims card during your store visit. Hand it personally with a specific reason. Simple, personal, immediate.'},
+  {i:'🍕',t:'Free Meal on Shift — $0-$8',d:'Tell the RGM to give them a free meal on your behalf. Easy to arrange, feels like a perk, works within food cost.'},
+  {i:'🧢',t:'Pizza Hut Branded Merch — $5-$15',d:'Branded hat, hoodie, or t-shirt. Employees actually wear these and feel pride in the brand.'},
+  {i:'🎬',t:'Movie Ticket — $15-$18',d:'Cineplex general admission. Easy to buy online, meaningful to receive. Great for a one-time outstanding performance.'},
+  {i:'📦',t:'Amazon Gift Card — $15-$20',d:'Instantly sent by email. Flexible and everyone wants it. Good for top monthly performer.'},
+  {i:'🧁',t:'Treats for the Whole Shift — $10-$20',d:'Show up with donuts or a Costco cake for their shift — and say publicly it is because of that specific person. The whole team celebrates.'},
+  {i:'⛽',t:'Gas Card — $20',d:'For drivers especially, a $20 gas card is extremely practical. Petro-Canada or Esso from any convenience store.'},
+  {i:'📅',t:'Preferred Scheduling — $0',d:'Let them pick one shift per week for a month. Zero cost, high perceived value. Works especially well for students or parents.'},
 ];
-
-const PREMIUM_REWARDS = [
-  { icon:'🎟️', title:'Cineplex VIP Experience — $30–$50', desc:'VIP cinema ticket for 2 — reclining seats, full service. A genuinely special experience for a top RGM or shift leader.' },
-  { icon:'🍽️', title:'Restaurant Gift Card — $50', desc:'Earls, Boston Pizza, or local restaurant. For an RGM who has gone above and beyond over a sustained period.' },
-  { icon:'🛒', title:'Superstore / Walmart Gift Card — $50', desc:'Extremely practical — groceries, household items. For employees with families this is more valuable than a restaurant card.' },
-  { icon:'💆', title:'Spa / Massage Gift Card — $50–$80', desc:'For an RGM who has had a tough month and pushed through. Signal that you see the effort and they deserve to recharge.' },
-  { icon:'🎮', title:'Best Buy Gift Card — $50–$100', desc:'For a younger team member who loves gaming or tech. Feels premium and personal if you know their interests.' },
-  { icon:'✈️', title:'Airbnb / Travel Credit — $100', desc:'For an exceptional RGM — a weekend away. Reserve for major milestones: 1-year anniversary, exceptional quarter, saving a struggling store.' },
+var PREM_R=[
+  {i:'🎟️',t:'Cineplex VIP for Two — $30-$50',d:'VIP reclining seats, full service. A genuinely special experience for a top RGM or shift leader.'},
+  {i:'🍽️',t:'Restaurant Gift Card — $50',d:'Earls, Boston Pizza, or a local favourite. For an RGM who has gone above and beyond over a sustained period.'},
+  {i:'🛒',t:'Superstore or Walmart Card — $50',d:'Extremely practical. For employees with families this is more valuable than a restaurant card.'},
+  {i:'💆',t:'Spa or Massage Gift Card — $50-$80',d:'For an RGM who has had a tough month and pushed through. Signal that you see the effort and they deserve to recharge.'},
+  {i:'🎮',t:'Best Buy Gift Card — $50-$100',d:'For a younger team member who loves gaming or tech. Feels premium and personal.'},
+  {i:'✈️',t:'Airbnb Weekend — $100+',d:'Reserve for major milestones: 1-year anniversary, exceptional quarter, or saving a struggling store. Unforgettable recognition.'},
 ];
-
-function renderRewards() {
-  function rewardCards(arr) {
-    return arr.map(r => `
-      <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
-        <div style="font-size:26px;flex-shrink:0">${r.icon}</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;color:var(--black);margin-bottom:3px">${r.title}</div>
-          <div style="font-size:12.5px;color:var(--mid);line-height:1.5">${r.desc}</div>
-        </div>
-      </div>`).join('');
-  }
-  document.getElementById('freeRewards').innerHTML = rewardCards(FREE_REWARDS);
-  document.getElementById('budgetRewards').innerHTML = rewardCards(BUDGET_REWARDS);
-  document.getElementById('premiumRewards').innerHTML = rewardCards(PREMIUM_REWARDS);
+function renderRewards(){
+  function rows(arr){return arr.map(function(r){return '<div class="rrow"><div class="rico">'+r.i+'</div><div><div class="rtitle">'+r.t+'</div><div class="rdesc">'+r.d+'</div></div></div>';}).join('');}
+  document.getElementById('freeRew').innerHTML=rows(FREE_R);
+  document.getElementById('budgRew').innerHTML=rows(BUDG_R);
+  document.getElementById('premRew').innerHTML=rows(PREM_R);
 }
 
-// ============ REMINDERS ============
-function toggleDay(btn) { btn.classList.toggle('selected'); }
+// ---- REMINDERS ----
+async function enableRem(){
+  if('Notification' in window){
+    var perm=await Notification.requestPermission();
+    if(perm!=='granted'){document.getElementById('remStatus').innerHTML='<span style="color:var(--red)">Notifications blocked. Allow in browser settings then try again.</span>';return;}
+  }
+  var freq=document.getElementById('remFreq').value;
+  var time=document.getElementById('remTime').value;
+  var goal=document.getElementById('remGoal').value;
+  var sms=document.getElementById('remSMS').checked;
+  var s={freq:freq,time:time,goal:goal,enabled:true,sms:sms};
+  localStorage.setItem('ph_rem',JSON.stringify(s));
+  schedRem(s);
+  document.getElementById('remStatus').innerHTML='<span style="color:var(--green)">✅ Reminders enabled — '+freq+' at '+time+(sms?' + SMS':'')+'</span>';
+  renderWeekProg();
+}
 
-async function saveReminders() {
-  const btn = document.getElementById('reminderBtn');
-  if ('Notification' in window) {
-    const perm = await Notification.requestPermission();
-    if (perm !== 'granted') {
-      document.getElementById('reminderStatus').innerHTML = '<span style="color:var(--red)">❌ Notifications blocked. Please allow in browser settings, then try again.</span>';
-      return;
+function sendSMSReminder(msg){
+  var body=encodeURIComponent(msg);
+  var mailto='mailto:4163566245@txt.bell.ca?subject=Recognition+Reminder&body='+body;
+  window.open(mailto);
+}
+function schedRem(s){
+  function check(){
+    var now=new Date(); var parts=s.time.split(':'); var h=parseInt(parts[0]); var m=parseInt(parts[1]);
+    var dayOk=s.freq==='daily'?true:s.freq==='weekdays'?(now.getDay()>=1&&now.getDay()<=5):now.getDay()===1;
+    if(dayOk&&now.getHours()===h&&now.getMinutes()===m){
+      var od=getOverdue();
+      var wk=recs.filter(function(r){return (new Date()-new Date(r.date))/86400000<=7;}).length;
+      var goal=parseInt(s.goal)||3;
+      var msg=od.length?'⚠️ '+od.length+' employee(s) overdue for recognition — '+od[0].name+' and others.':wk<goal?'You have given '+wk+'/'+goal+' recognitions this week. Keep going!':'⭐ Great job! Keep recognizing your team.';
+      if('Notification' in window&&Notification.permission==='granted') new Notification('Pizza Hut Recognition',{body:msg});
     }
+    setTimeout(check,60000);
   }
-  const freq = document.getElementById('reminderFreq').value;
-  const time = document.getElementById('reminderTime').value;
-  const goal = document.getElementById('reminderGoal').value;
-  const settings = { freq, time, goal, enabled: true, savedAt: new Date().toISOString() };
-  localStorage.setItem('ph_reminder_settings', JSON.stringify(settings));
-  scheduleReminder(settings);
-  document.getElementById('reminderStatus').innerHTML = `<span style="color:var(--green)">✅ Reminders enabled — ${freq} at ${time}. Goal: ${goal} recognitions/week.</span>`;
-  renderReminderStatus();
+  setTimeout(check,5000);
+}
+function restoreRem(){
+  var s=JSON.parse(localStorage.getItem('ph_rem')||'null');
+  if(s){if(s.freq) document.getElementById('remFreq').value=s.freq; if(s.time) document.getElementById('remTime').value=s.time; if(s.goal) document.getElementById('remGoal').value=s.goal; if(s.enabled) schedRem(s); document.getElementById('remStatus').innerHTML=s.enabled?'<span style="color:var(--green)">✅ Reminders active — '+s.freq+' at '+s.time+'</span>':'';}
+}
+function renderWeekProg(){
+  var s=JSON.parse(localStorage.getItem('ph_rem')||'null');
+  var goal=s?parseInt(s.goal)||3:3;
+  var wk=recs.filter(function(r){return (new Date()-new Date(r.date))/86400000<=7;});
+  var pct=Math.min(100,Math.round(wk.length/goal*100));
+  var col=pct>=100?'var(--green)':'var(--red)';
+  document.getElementById('weekProg').innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">'+
+    '<div style="font-size:13px;font-weight:600">'+wk.length+' of '+goal+' recognitions this week</div>'+
+    '<div style="font-family:\'Bebas Neue\';font-size:22px;color:'+col+'">'+pct+'%</div></div>'+
+    '<div class="wbar"><div class="wbar-fill" style="width:'+pct+'%;background:'+col+'"></div></div>'+
+    '<div class="wkpis">'+STORES.map(function(s,i){
+      var cnt=wk.filter(function(r){return r.store===s;}).length;
+      return '<div class="wkpi"><div class="wkv" style="color:'+SCOL[i]+'">'+cnt+'</div><div class="wkl">'+s.split(' ')[0]+'</div></div>';
+    }).join('')+'</div>';
 }
 
-function scheduleReminder(settings) {
-  // Clear existing
-  const existing = localStorage.getItem('ph_reminder_timer');
-  if (existing) clearTimeout(parseInt(existing));
+function testSMS(){
+  var od=getOverdue();
+  var wk=recs.filter(function(r){return (new Date()-new Date(r.date))/86400000<=7;}).length;
+  var msg=od.length?'Pizza Hut Recognition: '+od.length+' employee(s) overdue — '+od.map(function(e){return e.name;}).join(', ')+'. Open recognition tool to act.':'Pizza Hut Recognition: You have given '+wk+' recognitions this week. Keep recognizing your team!';
+  sendSMSReminder(msg);
+}
 
-  function checkAndNotify() {
-    const now = new Date();
-    const [h, m] = settings.time.split(':').map(Number);
-    const dayOk = settings.freq === 'daily' ? true :
-                  settings.freq === 'weekdays' ? now.getDay() >= 1 && now.getDay() <= 5 :
-                  settings.freq === 'weekly' ? now.getDay() === 1 : true;
-
-    if (dayOk && now.getHours() === h && now.getMinutes() === m) {
-      const overdue = getOverdueEmployees();
-      const thisWeekRecs = recognitions.filter(r => {
-        const d = new Date(r.date);
-        return (new Date() - d) / (1000*60*60*24) <= 7;
-      }).length;
-      const goal = parseInt(settings.goal) || 3;
-      let msg = '⭐ Time to recognize your team!';
-      if (overdue.length > 0) msg = `⚠️ ${overdue.length} employee(s) overdue for recognition — ${overdue[0].name} and others.`;
-      else if (thisWeekRecs < goal) msg = `You've given ${thisWeekRecs}/${goal} recognitions this week. Keep going!`;
-      if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification('Pizza Hut Recognition Reminder', { body: msg, icon: '' });
-      }
+// Update schedRem to also trigger SMS
+var _origSchedRem=schedRem;
+schedRem=function(s){
+  function check(){
+    var now=new Date(); var parts=s.time.split(':'); var h=parseInt(parts[0]); var m=parseInt(parts[1]);
+    var dayOk=s.freq==='daily'?true:s.freq==='weekdays'?(now.getDay()>=1&&now.getDay()<=5):now.getDay()===1;
+    if(dayOk&&now.getHours()===h&&now.getMinutes()===m){
+      var od=getOverdue();
+      var wk=recs.filter(function(r){return (new Date()-new Date(r.date))/86400000<=7;}).length;
+      var goal=parseInt(s.goal)||3;
+      var msg=od.length?'Pizza Hut Recognition: '+od.length+' employee(s) overdue — '+od.map(function(e){return e.name;}).join(', ')+'.':(wk<goal?'Pizza Hut Recognition: '+wk+'/'+goal+' recognitions this week. Keep going!':'Pizza Hut Recognition: Great job this week! Keep recognizing your team.');
+      if('Notification' in window&&Notification.permission==='granted') new Notification('Pizza Hut Recognition',{body:msg});
+      if(s.sms) sendSMSReminder(msg);
     }
-    // Check every minute
-    const timer = setTimeout(checkAndNotify, 60000);
-    localStorage.setItem('ph_reminder_timer', timer);
+    setTimeout(check,60000);
   }
-  setTimeout(checkAndNotify, 5000);
-}
-
-function renderReminderStatus() {
-  const settings = JSON.parse(localStorage.getItem('ph_reminder_settings') || 'null');
-  if (settings) {
-    document.getElementById('reminderFreq').value = settings.freq || 'daily';
-    document.getElementById('reminderTime').value = settings.time || '09:00';
-    document.getElementById('reminderGoal').value = settings.goal || '3';
-    document.getElementById('reminderStatus').innerHTML = settings.enabled
-      ? `<span style="color:var(--green)">✅ Reminders active — ${settings.freq} at ${settings.time}</span>`
-      : '';
-  }
-
-  // Week goal tracker
-  const goal = parseInt(settings?.goal) || 3;
-  const thisWeek = recognitions.filter(r => (new Date() - new Date(r.date)) / (1000*60*60*24) <= 7);
-  const pct = Math.min(100, Math.round((thisWeek.length / goal) * 100));
-  const byStore = {};
-  STORES.forEach(s => byStore[s.split(' ')[0]] = thisWeek.filter(r => r.store === s).length);
-
-  document.getElementById('weekGoalTracker').innerHTML = `
-    <div style="margin-bottom:14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div style="font-size:13px;font-weight:600;color:var(--black)">${thisWeek.length} of ${goal} recognitions this week</div>
-        <div style="font-family:'Bebas Neue';font-size:22px;color:${pct>=100?'var(--green)':'var(--red)'}">${pct}%</div>
-      </div>
-      <div style="height:10px;background:#f0e8e0;border-radius:99px;overflow:hidden">
-        <div style="width:${pct}%;height:100%;background:${pct>=100?'var(--green)':'var(--red)'};border-radius:99px;transition:width 0.8s"></div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
-      ${STORES.map((s,i) => {
-        const name = s.split(' ')[0];
-        const count = byStore[name] || 0;
-        return `<div style="text-align:center;background:var(--bg);border-radius:8px;padding:8px">
-          <div style="font-family:'Bebas Neue';font-size:22px;color:${STORE_COLORS[i]}">${count}</div>
-          <div style="font-size:10px;color:var(--mid)">${name}</div>
-        </div>`;
-      }).join('')}
-    </div>`;
-}
-
-// Auto-restore reminder on page load
-(function() {
-  const settings = JSON.parse(localStorage.getItem('ph_reminder_settings') || 'null');
-  if (settings && settings.enabled) scheduleReminder(settings);
-})();
+  setTimeout(check,5000);
+};
 
 init();
-
 </script>
 </body>
 </html>
